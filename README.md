@@ -2,23 +2,23 @@
 
 **Print your path to productivity. No screens needed.**
 
-A web app that generates beautiful, printable planner templates designed to help you organize every area of your life — on paper. With 24 templates across 10 categories, PDF & Word export, and support for A4/A5 paper sizes, Inkpath is built for people who want to reduce screen time and take control of their productivity using pen and paper.
+A web app that generates beautiful, printable planner templates designed to help you organize every area of your life — on paper. With 34 templates across 11 categories, PDF & Word export, and support for A4/A5 paper sizes, Inkpath is built for people who want to reduce screen time and take control of their productivity using pen and paper.
 
 ---
 
-## v2.0.0 — What's New
+## v3.0.0 — What's New
 
-- **24 templates** (expanded from 11) across 10 categories
+- **34 templates** across 11 categories
+- **Study & Learning category** — 7 new templates for students: Study Session Planner, Exam Countdown, Cornell Notes, Spaced Repetition Tracker, Weekly Study Timetable, Assignment Tracker, Subject Review Sheet
 - **PDF export** — High-quality single-page PDF via browser or Electron
 - **Word export** — `.doc` download with correct A4/A5 page dimensions and preserved table layouts
-- **New categories** — Yearly Planning, Finance, Health & Fitness, Productivity, and Personal Growth
 - **A5 optimizations** — Responsive layouts that adapt gracefully to smaller paper
 
 ---
 
 ## Features
 
-### 24 Printable Templates
+### 34 Printable Templates
 
 | # | Category | Template | Description |
 | --- | -------- | -------- | ----------- |
@@ -49,6 +49,13 @@ A web app that generates beautiful, printable planner templates designed to help
 | 25 | | Relationships | Contact tracker with birthdays, last contacted, notes |
 | 26 | | Decision Maker | Pros/cons matrix with weighted scoring |
 | 27 | | Emergency Reference | Important contacts, medical info, accounts — one-page reference |
+| 28 | **Study & Learning** | Study Session Planner | Pomodoro-style study sessions with subject tracking, confidence check, focus rating |
+| 29 | | Exam Countdown Planner | Exam details, syllabus breakdown, weekly revision plan, practice test tracker |
+| 30 | | Cornell Notes | Classic Cornell note-taking method — cues, notes, and summary |
+| 31 | | Spaced Repetition Tracker | Track review intervals (1, 3, 7, 14, 30 days) for long-term retention |
+| 32 | | Weekly Study Timetable | Full weekly schedule grid with morning, afternoon, and evening blocks |
+| 33 | | Assignment Tracker | Track all assignments with deadlines, priority, status, and grades |
+| 34 | | Subject Review Sheet | Deep single-subject review — concepts, formulas, practice problems, mastery rating |
 
 ### Key Features
 
@@ -91,7 +98,7 @@ npm run build:linux  # Linux (.AppImage)
 
 ## Usage
 
-1. **Select a template** from the dropdown (24 options across 10 categories)
+1. **Select a template** from the dropdown (34 options across 11 categories)
 2. **Choose your paper size** — A4 or A5
 3. **Set the start date** (templates auto-fill dates)
 4. **Pick a visual style** — Minimal, Lined, or Dot Grid
@@ -139,7 +146,8 @@ Inkpath/
 │       ├── finance.js              # Budget, Expense Log, Savings Goals
 │       ├── health.js               # Workout Log, Meal Planner, Sleep Tracker
 │       ├── productivity.js         # Brain Dump, Project Planner, Routines
-│       └── personal.js            # Journal, Reading, Relationships, Decisions, Emergency
+│       ├── personal.js            # Journal, Reading, Relationships, Decisions, Emergency
+│       └── study.js               # Study Session, Exam Countdown, Cornell Notes, Spaced Repetition, Timetable, Assignments, Review
 └── assets/                 # Icons and images
 ```
 

@@ -1,7 +1,7 @@
 {
     "name": "inkpath",
-    "version": "2.0.0",
-    "description": "Print your path to productivity. Generate printable A4/A5 planner templates to organize your daily, weekly, and monthly life — on paper. Export to PDF or Word.",
+    "version": "3.0.0",
+    "description": "Print your path to productivity. 34 printable A4/A5 planner templates for daily planning, studying, exams, finance, health & more. Export to PDF or Word.",
     "main": "main.js",
     "scripts": {
         "start": "electron .",

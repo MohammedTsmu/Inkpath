@@ -26,7 +26,8 @@
         FinanceTemplates,
         HealthTemplates,
         ProductivityTemplates,
-        PersonalTemplates
+        PersonalTemplates,
+        StudyTemplates
     );
 
     // ─── Initialize ─────────────────────────────────────────────
