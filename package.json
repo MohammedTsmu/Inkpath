@@ -1,0 +1,62 @@
+{
+    "name": "inkpath",
+    "version": "2.0.0",
+    "description": "Print your path to productivity. Generate printable A4/A5 planner templates to organize your daily, weekly, and monthly life — on paper. Export to PDF or Word.",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "dev": "electron . --enable-logging",
+        "sync-version": "node scripts/sync-version.js",
+        "prestart": "npm run sync-version",
+        "prebuild:win": "npm run sync-version",
+        "prebuild:mac": "npm run sync-version",
+        "prebuild:linux": "npm run sync-version",
+        "version": "npm run sync-version && git add js/version.js",
+        "build:win": "electron-builder --win",
+        "build:mac": "electron-builder --mac",
+        "build:linux": "electron-builder --linux"
+    },
+    "build": {
+        "appId": "com.inkpath.app",
+        "productName": "Inkpath",
+        "directories": {
+            "output": "dist"
+        },
+        "files": [
+            "index.html",
+            "main.js",
+            "preload.js",
+            "css/**/*",
+            "js/**/*",
+            "assets/**/*"
+        ],
+        "win": {
+            "target": "nsis",
+            "icon": "assets/icon.png"
+        },
+        "mac": {
+            "target": "dmg",
+            "icon": "assets/icon.png"
+        },
+        "linux": {
+            "target": "AppImage",
+            "icon": "assets/icon.png"
+        }
+    },
+    "keywords": [
+        "planner",
+        "productivity",
+        "printable",
+        "daily-planner",
+        "habit-tracker",
+        "anti-procrastination",
+        "time-management",
+        "paper-planner"
+    ],
+    "author": "Inkpath",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^28.0.0",
+        "electron-builder": "^24.0.0"
+    }
+}

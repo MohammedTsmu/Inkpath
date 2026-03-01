@@ -1,0 +1,491 @@
+/* ============================================================
+   Inkpath — Template Styles
+   Shared styles for all planner template pages
+   ============================================================ */
+
+/* ========== TEMPLATE PAGE ========== */
+
+.template-page {
+    padding: 10mm;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #2c2c2c;
+    position: relative;
+}
+
+.template-page.a5 {
+    padding: 7mm;
+    font-size: 0.78rem;
+}
+
+/* ========== TEMPLATE HEADER ========== */
+
+.tpl-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid #2c2c2c;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tpl-header h2 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+}
+
+.template-page.a5 .tpl-header h2 {
+    font-size: 1.05rem;
+}
+
+.tpl-header .tpl-date {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.tpl-header .tpl-subtitle {
+    font-size: 0.75rem;
+    color: #888;
+    font-style: italic;
+}
+
+/* ========== SECTION ========== */
+
+.tpl-section {
+    margin-bottom: 0.85rem;
+    page-break-inside: avoid;
+}
+
+.tpl-section-title {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: #555;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.2rem;
+    margin-bottom: 0.45rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.tpl-section-title .icon {
+    font-size: 0.85rem;
+}
+
+/* ========== GRID LAYOUTS ========== */
+
+.tpl-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.tpl-3col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.tpl-sidebar-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+}
+
+.template-page.a5 .tpl-sidebar-layout {
+    grid-template-columns: 1.5fr 1fr;
+    gap: 0.5rem;
+}
+
+/* ========== LINES & WRITING AREAS ========== */
+
+.tpl-line {
+    border-bottom: 1px solid #e0ddd8;
+    min-height: 1.6em;
+    padding: 0.15em 0;
+}
+
+.tpl-line-labeled {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.tpl-line-labeled .label {
+    font-size: 0.7rem;
+    color: #888;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.tpl-line-labeled .line {
+    flex: 1;
+    border-bottom: 1px solid #e0ddd8;
+    min-height: 1.4em;
+}
+
+.tpl-lines-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Dot grid variant */
+.tpl-dotgrid .tpl-line {
+    border-bottom: none;
+    background-image: radial-gradient(circle, #ccc 0.5px, transparent 0.5px);
+    background-size: 5mm 5mm;
+    min-height: 2em;
+}
+
+/* Lined variant */
+.tpl-lined .tpl-line {
+    border-bottom: 1px solid #d0d0d0;
+}
+
+/* ========== CHECKBOX ITEMS ========== */
+
+.tpl-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tpl-checklist li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #f0ede8;
+}
+
+.tpl-checklist li:last-child {
+    border-bottom: none;
+}
+
+.tpl-checkbox {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid #aaa;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.tpl-checkbox.round {
+    border-radius: 50%;
+}
+
+.tpl-check-label {
+    flex: 1;
+    font-size: 0.82rem;
+}
+
+.tpl-check-line {
+    flex: 1;
+    border-bottom: 1px solid #e0ddd8;
+    min-height: 1em;
+}
+
+/* Priority indicators */
+.tpl-priority {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    font-size: 0.6rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.tpl-priority.high {
+    border: 1.5px solid #c0392b;
+    color: #c0392b;
+}
+
+.tpl-priority.medium {
+    border: 1.5px solid #e67e22;
+    color: #e67e22;
+}
+
+.tpl-priority.low {
+    border: 1.5px solid #27ae60;
+    color: #27ae60;
+}
+
+/* ========== TIME BLOCKS ========== */
+
+.tpl-timeblock {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    border-left: 2px solid #ddd;
+}
+
+.tpl-timeblock-row {
+    display: contents;
+}
+
+.tpl-timeblock-time {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #888;
+    padding: 0.3rem 0.5rem 0.3rem 0;
+    text-align: right;
+    border-bottom: 1px solid #f0ede8;
+}
+
+.tpl-timeblock-slot {
+    border-bottom: 1px solid #e8e5e0;
+    padding: 0.3rem 0.5rem;
+    min-height: 1.8em;
+}
+
+.tpl-timeblock-slot.highlight {
+    background: #f5ecd7;
+}
+
+/* ========== TABLES ========== */
+
+.tpl-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+}
+
+.tpl-table th,
+.tpl-table td {
+    border: 1px solid #ddd;
+    padding: 0.3rem 0.4rem;
+    text-align: center;
+    vertical-align: top;
+}
+
+.tpl-table th {
+    background: #f8f7f4;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #666;
+}
+
+.tpl-table td {
+    min-height: 2em;
+}
+
+.tpl-table td.wide {
+    text-align: left;
+}
+
+/* ========== RATING SCALES ========== */
+
+.tpl-rating {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+}
+
+.tpl-rating-dot {
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid #aaa;
+    border-radius: 50%;
+}
+
+.tpl-rating-label {
+    font-size: 0.65rem;
+    color: #888;
+    margin: 0 0.2rem;
+}
+
+/* ========== BOXES & CARDS ========== */
+
+.tpl-box {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.tpl-box-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #666;
+    margin-bottom: 0.35rem;
+}
+
+.tpl-highlight-box {
+    background: #f5ecd7;
+    border: 1px solid #e8dbb8;
+    border-radius: 4px;
+    padding: 0.6rem;
+}
+
+.tpl-quote-box {
+    border-left: 3px solid #3a6b4c;
+    padding: 0.5rem 0.75rem;
+    font-style: italic;
+    color: #666;
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+}
+
+/* ========== CALENDAR GRID ========== */
+
+.tpl-calendar {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tpl-calendar th {
+    background: #f8f7f4;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #666;
+    padding: 0.3rem;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.tpl-calendar td {
+    border: 1px solid #ddd;
+    width: 14.28%;
+    height: 3.2em;
+    vertical-align: top;
+    padding: 0.2rem 0.3rem;
+    font-size: 0.75rem;
+}
+
+.tpl-calendar td.empty {
+    background: #fafaf8;
+}
+
+.tpl-calendar .day-num {
+    font-weight: 600;
+    font-size: 0.72rem;
+    color: #555;
+}
+
+/* ========== HABIT TRACKER GRID ========== */
+
+.tpl-habit-grid {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tpl-habit-grid th {
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: #888;
+    padding: 0.2rem;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.tpl-habit-grid th.habit-name {
+    text-align: left;
+    font-size: 0.7rem;
+    min-width: 80px;
+}
+
+.tpl-habit-grid td {
+    border: 1px solid #e0e0e0;
+    width: 1.2em;
+    height: 1.2em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tpl-habit-grid td.habit-label {
+    text-align: left;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.75rem;
+    min-width: 80px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* ========== MOTIVATIONAL ELEMENTS ========== */
+
+.tpl-mantra {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #999;
+    padding: 0.5rem;
+    border-top: 1px solid #eee;
+    margin-top: auto;
+}
+
+.tpl-footer-line {
+    border-top: 1px solid #ddd;
+    padding-top: 0.4rem;
+    margin-top: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    color: #aaa;
+}
+
+/* ========== PROGRESS BAR ========== */
+
+.tpl-progress-bar {
+    display: flex;
+    gap: 2px;
+    margin-top: 0.2rem;
+}
+
+.tpl-progress-segment {
+    flex: 1;
+    height: 8px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+
+/* ========== SPECIAL: EISENHOWER MATRIX ========== */
+
+.tpl-matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.5rem;
+}
+
+.tpl-matrix-cell {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.5rem;
+    min-height: 6em;
+}
+
+.tpl-matrix-cell.urgent-important {
+    border-color: #c0392b;
+    border-width: 2px;
+}
+
+.tpl-matrix-cell.not-urgent-important {
+    border-color: #e67e22;
+    border-width: 2px;
+}
+
+.tpl-matrix-cell.urgent-not-important {
+    border-color: #3498db;
+}
+
+.tpl-matrix-cell.not-urgent-not-important {
+    border-color: #95a5a6;
+}
+
+.tpl-matrix-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.3rem;
+}

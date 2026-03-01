@@ -1,0 +1,116 @@
+/* ============================================================
+   Inkpath — Print Stylesheet
+   Optimized for A4 and A5 paper printing
+   ============================================================ */
+
+/* Hide everything that shouldn't print */
+.no-print {
+    display: none !important;
+}
+
+@page {
+    margin: 8mm;
+}
+
+@page :first {
+    margin-top: 8mm;
+}
+
+/* A4 print size (default) */
+body.paper-a4 {
+    width: 210mm;
+}
+
+/* A5 print size */
+body.paper-a5 {
+    width: 148mm;
+}
+
+@media print {
+    *,
+    *::before,
+    *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        font-size: 10pt;
+    }
+
+    body {
+        display: block;
+    }
+
+    .print-area {
+        padding: 0;
+        display: block;
+    }
+
+    .template-container {
+        max-width: none;
+        min-height: auto;
+        width: 100%;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        background: #fff;
+    }
+
+    /* Page break utilities */
+    .page-break {
+        page-break-after: always;
+        break-after: page;
+    }
+
+    .page-break-before {
+        page-break-before: always;
+        break-before: page;
+    }
+
+    .no-page-break {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    /* Ensure template pages fill properly */
+    .template-page {
+        page-break-after: always;
+        break-after: page;
+        min-height: auto;
+        padding: 0;
+    }
+
+    .template-page:last-child {
+        page-break-after: auto;
+        break-after: auto;
+    }
+
+    /* Clean borders for print */
+    .tpl-section {
+        border-color: #ccc !important;
+    }
+
+    .tpl-checkbox {
+        border-color: #999 !important;
+    }
+
+    /* Make sure lines are visible */
+    .tpl-line {
+        border-bottom-color: #ddd !important;
+    }
+
+    .tpl-dotgrid .tpl-line {
+        border-bottom: none !important;
+    }
+}
+
+/* A5-specific print */
+@media print and (max-width: 148mm) {
+    html {
+        font-size: 8pt;
+    }
+}

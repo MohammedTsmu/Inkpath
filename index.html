@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' blob:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' blob:; font-src 'self' data:; img-src 'self' data: blob:;">
+    <title>Inkpath — Print Your Path to Productivity</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="css/templates.css">
+</head>
+<body>
+    <!-- ========== NAVIGATION / CONTROLS (hidden when printing) ========== -->
+    <header class="app-header no-print">
+        <div class="header-inner">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 32 32" width="32" height="32">
+                    <defs>
+                        <linearGradient id="logo-bg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#4a8060"/>
+                            <stop offset="100%" stop-color="#2a5438"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="32" height="32" rx="7" fill="url(#logo-bg)"/>
+                    <path d="M9 26 C11 23 14 24 15 22 C16 20 14.5 18.5 16 17 C17.5 15.5 19.5 16.5 20 15" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M20 15 L22 8 L21 5 L19.5 5 L18 8 Z" fill="white" stroke="rgba(255,255,255,0.8)" stroke-width="0.3"/>
+                    <line x1="20" y1="8.5" x2="20" y2="13.5" stroke="#3a6b4c" stroke-width="0.8" stroke-linecap="round"/>
+                    <circle cx="9" cy="26" r="1.2" fill="rgba(255,255,255,0.6)"/>
+                    <circle cx="20" cy="15.2" r="1" fill="white" opacity="0.9"/>
+                </svg>
+                <h1>Inkpath</h1>
+            </div>
+            <p class="tagline">Print your path to productivity. No screens needed.</p>
+        </div>
+    </header>
+
+    <nav class="controls no-print">
+        <div class="controls-inner">
+            <!-- Template Selector -->
+            <div class="control-group">
+                <label for="template-select">Template</label>
+                <select id="template-select">
+                    <optgroup label="Daily">
+                        <option value="daily-planner">Daily Planner</option>
+                        <option value="daily-timeblock">Daily Time Blocker</option>
+                        <option value="daily-focus">Deep Focus Day</option>
+                    </optgroup>
+                    <optgroup label="Weekly">
+                        <option value="weekly-planner">Weekly Planner</option>
+                        <option value="weekly-habits">Weekly Habit Tracker</option>
+                        <option value="weekly-review">Weekly Review</option>
+                    </optgroup>
+                    <optgroup label="Monthly">
+                        <option value="monthly-planner">Monthly Planner</option>
+                        <option value="monthly-goals">Monthly Goal Setter</option>
+                        <option value="monthly-habits">Monthly Habit Grid</option>
+                    </optgroup>
+                    <optgroup label="Anti-Procrastination">
+                        <option value="procrastination-buster">Procrastination Buster</option>
+                        <option value="accountability-sheet">Accountability Sheet</option>
+                    </optgroup>
+                    <optgroup label="Yearly & Vision">
+                        <option value="yearly-vision">Annual Vision Board</option>
+                        <option value="quarterly-planner">Quarterly Planner</option>
+                    </optgroup>
+                    <optgroup label="Finance">
+                        <option value="monthly-budget">Monthly Budget</option>
+                        <option value="expense-log">Expense Log</option>
+                        <option value="savings-goals">Savings Goals Tracker</option>
+                    </optgroup>
+                    <optgroup label="Health & Fitness">
+                        <option value="workout-log">Workout Log</option>
+                        <option value="meal-planner">Meal Planner</option>
+                        <option value="sleep-tracker">Sleep Tracker</option>
+                    </optgroup>
+                    <optgroup label="Productivity">
+                        <option value="brain-dump">Brain Dump</option>
+                        <option value="project-planner">Project Planner</option>
+                        <option value="routines">Morning & Evening Routines</option>
+                    </optgroup>
+                    <optgroup label="Personal Growth">
+                        <option value="journal">Gratitude & Mood Journal</option>
+                        <option value="reading-log">Reading & Learning Log</option>
+                        <option value="relationships">Relationships & Social</option>
+                        <option value="decision-maker">Decision Maker</option>
+                        <option value="emergency-ref">Emergency Reference</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <!-- Paper Size -->
+            <div class="control-group">
+                <label for="paper-size">Paper Size</label>
+                <select id="paper-size">
+                    <option value="a4" selected>A4 (210 × 297 mm)</option>
+                    <option value="a5">A5 (148 × 210 mm)</option>
+                </select>
+            </div>
+
+            <!-- Date Picker -->
+            <div class="control-group">
+                <label for="start-date">Start Date</label>
+                <input type="date" id="start-date">
+            </div>
+
+            <!-- Theme -->
+            <div class="control-group">
+                <label for="theme-select">Style</label>
+                <select id="theme-select">
+                    <option value="minimal" selected>Minimal</option>
+                    <option value="lined">Lined</option>
+                    <option value="dotgrid">Dot Grid</option>
+                </select>
+            </div>
+
+            <!-- Actions -->
+            <div class="control-group actions">
+                <button id="btn-generate" class="btn btn-primary">Generate</button>
+                <button id="btn-print" class="btn btn-secondary">🖨️ Print</button>
+                <button id="btn-pdf" class="btn btn-accent" disabled>📄 Export PDF</button>
+                <button id="btn-word" class="btn btn-accent" disabled>📝 Export Word</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== TEMPLATE PREVIEW / PRINT AREA ========== -->
+    <main id="print-area" class="print-area">
+        <!-- Templates are injected here by JS -->
+        <div id="template-container" class="template-container">
+            <div class="empty-state no-print">
+                <svg viewBox="0 0 64 64" width="64" height="64">
+                    <rect x="8" y="4" width="48" height="56" rx="4" fill="none" stroke="#ccc" stroke-width="2"/>
+                    <line x1="18" y1="16" x2="46" y2="16" stroke="#ddd" stroke-width="2"/>
+                    <line x1="18" y1="24" x2="46" y2="24" stroke="#ddd" stroke-width="2"/>
+                    <line x1="18" y1="32" x2="38" y2="32" stroke="#ddd" stroke-width="2"/>
+                    <circle cx="32" cy="48" r="8" fill="none" stroke="#ddd" stroke-width="2"/>
+                    <line x1="32" y1="44" x2="32" y2="52" stroke="#ddd" stroke-width="2"/>
+                    <line x1="28" y1="48" x2="36" y2="48" stroke="#ddd" stroke-width="2"/>
+                </svg>
+                <h2>Choose a template and hit Generate</h2>
+                <p>Your printable planner page will appear here</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="app-footer no-print">
+        <p><span class="brand-name">Inkpath</span> &mdash; Take control of your time, on paper. v<span id="app-version">1.0.0</span> &copy; <span id="app-year">2026</span></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/lib/html2pdf.bundle.min.js"></script>
+    <script src="js/version.js"></script>
+    <script src="js/templates/daily.js"></script>
+    <script src="js/templates/weekly.js"></script>
+    <script src="js/templates/monthly.js"></script>
+    <script src="js/templates/anti-procrastination.js"></script>
+    <script src="js/templates/yearly.js"></script>
+    <script src="js/templates/finance.js"></script>
+    <script src="js/templates/health.js"></script>
+    <script src="js/templates/productivity.js"></script>
+    <script src="js/templates/personal.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
