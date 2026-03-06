@@ -6,7 +6,14 @@ A web app that generates beautiful, printable planner templates designed to help
 
 ---
 
-## v3.1.0 — What's New
+## v3.2.0 — What's New
+
+- **Multi-language support (i18n)** — Full Arabic (العربية) language option with RTL layout support
+- **Language selector** — Switch between English and Arabic from the controls bar; preference is saved
+- **All 34 templates translated** — Every template renders in the selected language with locale-aware date formatting
+- **RTL layout** — Proper right-to-left text direction, mirrored UI, and bidirectional template rendering
+
+## v3.1.0
 
 - **Improved print visibility** — All template lines, borders, and grid elements are now darker and clearly visible when printed
 - **Improved PDF export visibility** — Lines and borders in exported PDFs are no longer faded; all elements render with strong contrast

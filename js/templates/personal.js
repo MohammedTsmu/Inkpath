@@ -8,42 +8,43 @@ const PersonalTemplates = {
     // ─── Gratitude & Mood Journal ───────────────────────────────
     'journal': function (date, paperSize) {
         const isA5 = paperSize === 'a5';
+        const dir = I18N.getDir();
         const weekDates = getWeekDates(date);
-        const weekRange = `${formatDateShort(weekDates[0])} — ${formatDateShort(weekDates[6])}`;
-        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        const weekRange = `${I18N.formatDateShort(weekDates[0])} — ${I18N.formatDateShort(weekDates[6])}`;
+        const days = [t('day.monday'), t('day.tuesday'), t('day.wednesday'), t('day.thursday'), t('day.friday'), t('day.saturday'), t('day.sunday')];
         const displayDays = isA5 ? days.slice(0, 5) : days;
         const moods = ['😔', '😕', '😐', '🙂', '😊'];
 
         return `
-        <div class="template-page ${isA5 ? 'a5' : ''}" id="journal">
+        <div class="template-page ${isA5 ? 'a5' : ''}" dir="${dir}" id="journal">
             <div class="tpl-header">
                 <div>
-                    <h2>Gratitude & Mood Journal</h2>
-                    <div class="tpl-subtitle">Feel it. Write it. Grow from it.</div>
+                    <h2>${t('journal.title')}</h2>
+                    <div class="tpl-subtitle">${t('journal.subtitle')}</div>
                 </div>
                 <div class="tpl-date">${weekRange}</div>
             </div>
 
             <div class="tpl-quote-box">
-                "Gratitude turns what we have into enough."
+                ${t('journal.quote')}
             </div>
 
             ${displayDays.map((day, i) => `
             <div class="tpl-section" style="page-break-inside:avoid">
-                <div class="tpl-section-title"><span class="icon">📖</span> ${isA5 ? day.substring(0, 3) : day} — ${formatDateShort(weekDates[i])}</div>
+                <div class="tpl-section-title"><span class="icon">📖</span> ${isA5 ? day.substring(0, 3) : day} — ${I18N.formatDateShort(weekDates[i])}</div>
                 <div style="display:flex;gap:0.75rem;align-items:flex-start">
                     <div style="flex:1">
                         <div class="tpl-line-labeled">
-                            <span class="label">Grateful for:</span>
+                            <span class="label">${t('journal.grateful')}</span>
                             <div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div>
                         </div>
                         <div class="tpl-line-labeled" style="margin-top:0.15rem">
-                            <span class="label">Today's win:</span>
+                            <span class="label">${t('journal.todayFocus')}</span>
                             <div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div>
                         </div>
                     </div>
                     <div style="display:flex;gap:3px;align-items:center">
-                        <span style="font-size:0.6rem;color:#aaa">Mood:</span>
+                        <span style="font-size:0.6rem;color:#aaa">${t('journal.mood')}</span>
                         ${moods.map(m => `<span style="font-size:0.7rem;opacity:0.4">${m}</span>`).join('')}
                     </div>
                 </div>
@@ -51,65 +52,66 @@ const PersonalTemplates = {
 
             <!-- Weekly Reflection -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">💭</span> Weekly Reflection</div>
+                <div class="tpl-section-title"><span class="icon">💭</span> ${t('journal.thoughts')}</div>
                 <div class="tpl-box">
-                    <div class="tpl-box-title">Best moment this week:</div>
+                    <div class="tpl-box-title">${t('journal.highlight')}</div>
                     <div class="tpl-line"></div>
-                    <div class="tpl-box-title" style="margin-top:0.3rem">Something I learned about myself:</div>
+                    <div class="tpl-box-title" style="margin-top:0.3rem">${t('journal.learned')}</div>
                     <div class="tpl-line"></div>
-                    <div class="tpl-box-title" style="margin-top:0.3rem">One thing I want to change:</div>
+                    <div class="tpl-box-title" style="margin-top:0.3rem">${t('journal.moodScale')}</div>
                     <div class="tpl-line"></div>
                 </div>
             </div>
 
-            <div class="tpl-mantra">What you focus on grows. Focus on the good.</div>
+            <div class="tpl-mantra">${t('journal.mantra')}</div>
         </div>`;
     },
 
     // ─── Reading & Learning Log ─────────────────────────────────
     'reading-log': function (date, paperSize) {
         const isA5 = paperSize === 'a5';
-        const monthName = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        const dir = I18N.getDir();
+        const monthName = I18N.getMonthName(date);
         const bookCount = isA5 ? 3 : 4;
         const skillCount = isA5 ? 3 : 5;
 
         return `
-        <div class="template-page ${isA5 ? 'a5' : ''}" id="reading-log">
+        <div class="template-page ${isA5 ? 'a5' : ''}" dir="${dir}" id="reading-log">
             <div class="tpl-header">
                 <div>
-                    <h2>Reading & Learning Log</h2>
-                    <div class="tpl-subtitle">Feed your mind. Track your growth.</div>
+                    <h2>${t('reading.title')}</h2>
+                    <div class="tpl-subtitle">${t('reading.subtitle')}</div>
                 </div>
                 <div class="tpl-date">${monthName}</div>
             </div>
 
             <!-- Currently Reading -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">📚</span> Books This Month</div>
+                <div class="tpl-section-title"><span class="icon">📚</span> ${t('reading.monthlyList')}</div>
                 ${repeat(bookCount, (i) => `
                 <div class="tpl-box" style="margin-bottom:0.5rem">
                     <div class="tpl-line-labeled">
-                        <span class="label">📖 Title:</span>
+                        <span class="label">📖 ${t('reading.bookName')}</span>
                         <div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div>
                     </div>
                     <div style="display:flex;gap:0.75rem;margin-top:0.2rem">
                         <div class="tpl-line-labeled">
-                            <span class="label">Author:</span>
+                            <span class="label">${t('reading.author')}</span>
                             <div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em;min-width:50px"></div>
                         </div>
                         <div class="tpl-line-labeled">
-                            <span class="label">Pages:</span>
+                            <span class="label">${t('reading.pages')}</span>
                             <div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em;min-width:30px"></div>
                         </div>
                     </div>
-                    <div class="tpl-box-title" style="margin-top:0.2rem">Progress:</div>
+                    <div class="tpl-box-title" style="margin-top:0.2rem">${t('reading.status')}</div>
                     <div class="tpl-progress-bar">
                         ${repeat(10, '<div class="tpl-progress-segment"></div>')}
                     </div>
-                    <div class="tpl-box-title" style="margin-top:0.2rem">Key takeaway:</div>
+                    <div class="tpl-box-title" style="margin-top:0.2rem">${t('reading.keyInsights')}</div>
                     <div class="tpl-line"></div>
                     <div class="tpl-line-labeled" style="margin-top:0.2rem">
-                        <span class="label">Rating:</span>
+                        <span class="label">${t('reading.rating')}</span>
                         <div class="tpl-rating">${repeat(5, '<div class="tpl-rating-dot"></div>')}</div>
                     </div>
                 </div>`)}
@@ -117,13 +119,13 @@ const PersonalTemplates = {
 
             <!-- Skills / Courses -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🎓</span> Skills & Courses</div>
+                <div class="tpl-section-title"><span class="icon">🎓</span> ${t('reading.book')}</div>
                 <table class="tpl-table">
                     <thead>
                         <tr>
-                            <th>Skill / Course</th>
-                            <th style="width:70px">Progress</th>
-                            <th>Key Insight</th>
+                            <th>${t('reading.book')}</th>
+                            <th style="width:70px">${t('reading.status')}</th>
+                            <th>${t('reading.keyInsights')}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -134,42 +136,43 @@ const PersonalTemplates = {
 
             <!-- Reading Goals -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🎯</span> Learning Goals</div>
+                <div class="tpl-section-title"><span class="icon">🎯</span> ${t('reading.howApply')}</div>
                 <div class="tpl-lines-group">
                     ${repeat(isA5 ? 2 : 3, '<div class="tpl-line"></div>')}
                 </div>
             </div>
 
-            <div class="tpl-mantra">Leaders are readers. What you learn today shapes who you become tomorrow.</div>
+            <div class="tpl-mantra">${t('reading.mantra')}</div>
         </div>`;
     },
 
     // ─── Social & Relationships ─────────────────────────────────
     'relationships': function (date, paperSize) {
         const isA5 = paperSize === 'a5';
-        const monthName = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        const dir = I18N.getDir();
+        const monthName = I18N.getMonthName(date);
         const contactRows = isA5 ? 6 : 10;
 
         return `
-        <div class="template-page ${isA5 ? 'a5' : ''}" id="relationships">
+        <div class="template-page ${isA5 ? 'a5' : ''}" dir="${dir}" id="relationships">
             <div class="tpl-header">
                 <div>
-                    <h2>Relationships & Social</h2>
-                    <div class="tpl-subtitle">Nurture your connections. People matter most.</div>
+                    <h2>${t('rel.title')}</h2>
+                    <div class="tpl-subtitle">${t('rel.subtitle')}</div>
                 </div>
                 <div class="tpl-date">${monthName}</div>
             </div>
 
             <!-- People to Connect With -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">👥</span> People to Reach Out To</div>
+                <div class="tpl-section-title"><span class="icon">👥</span> ${t('rel.reach')}</div>
                 <table class="tpl-table">
                     <thead>
                         <tr>
-                            <th>Person</th>
-                            <th style="width:80px">Relationship</th>
-                            <th>Action (call, visit, message)</th>
-                            <th style="width:55px">By When</th>
+                            <th>${t('rel.person')}</th>
+                            <th style="width:80px">${t('rel.relationship')}</th>
+                            <th>${t('rel.nextAction')}</th>
+                            <th style="width:55px">${t('rel.lastContact')}</th>
                             <th style="width:35px">✓</th>
                         </tr>
                     </thead>
@@ -181,7 +184,7 @@ const PersonalTemplates = {
 
             <!-- Important Dates -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🎂</span> Birthdays & Important Dates This Month</div>
+                <div class="tpl-section-title"><span class="icon">🎂</span> ${t('rel.birthday')}</div>
                 <div class="${isA5 ? '' : 'tpl-2col'}">
                     <div class="tpl-lines-group">
                         ${repeat(isA5 ? 3 : 4, '<div class="tpl-line-labeled"><span class="label" style="min-width:30px">__/__</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>')}
@@ -194,7 +197,7 @@ const PersonalTemplates = {
 
             <!-- Relationship Goals -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">❤️</span> Relationship Goals This Month</div>
+                <div class="tpl-section-title"><span class="icon">❤️</span> ${t('rel.monthlyGoals')}</div>
                 <ul class="tpl-checklist">
                     ${repeat(isA5 ? 3 : 5, '<li><div class="tpl-checkbox"></div><div class="tpl-check-line"></div></li>')}
                 </ul>
@@ -202,40 +205,41 @@ const PersonalTemplates = {
 
             <!-- Reflection -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">💭</span> Social Reflection</div>
+                <div class="tpl-section-title"><span class="icon">💭</span> ${t('rel.gratitude')}</div>
                 <div class="tpl-box">
-                    <div class="tpl-box-title">Am I investing enough in relationships?</div>
+                    <div class="tpl-box-title">${t('rel.deepen')}</div>
                     <div class="tpl-line"></div>
-                    <div class="tpl-box-title" style="margin-top:0.3rem">Who energizes me?</div>
+                    <div class="tpl-box-title" style="margin-top:0.3rem">${t('rel.newConnection')}</div>
                     <div class="tpl-line"></div>
-                    <div class="tpl-box-title" style="margin-top:0.3rem">Who drains me? (Set boundaries)</div>
+                    <div class="tpl-box-title" style="margin-top:0.3rem">${t('rel.boundaries')}</div>
                     <div class="tpl-line"></div>
                 </div>
             </div>
 
-            <div class="tpl-mantra">The quality of your life = the quality of your relationships.</div>
+            <div class="tpl-mantra">${t('rel.mantra')}</div>
         </div>`;
     },
 
     // ─── Decision Maker ─────────────────────────────────────────
     'decision-maker': function (date, paperSize) {
         const isA5 = paperSize === 'a5';
-        const dateStr = formatDate(date);
+        const dir = I18N.getDir();
+        const dateStr = I18N.formatDate(date);
         const factorCount = isA5 ? 4 : 6;
 
         return `
-        <div class="template-page ${isA5 ? 'a5' : ''}" id="decision-maker">
+        <div class="template-page ${isA5 ? 'a5' : ''}" dir="${dir}" id="decision-maker">
             <div class="tpl-header">
                 <div>
-                    <h2>Decision Maker</h2>
-                    <div class="tpl-subtitle">Think clearly. Decide wisely. Act boldly.</div>
+                    <h2>${t('decision.title')}</h2>
+                    <div class="tpl-subtitle">${t('decision.subtitle')}</div>
                 </div>
                 <div class="tpl-date">${dateStr}</div>
             </div>
 
             <!-- The Decision -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🤔</span> The Decision</div>
+                <div class="tpl-section-title"><span class="icon">🤔</span> ${t('decision.what')}</div>
                 <div class="tpl-highlight-box">
                     <div class="tpl-line" style="border-color:#d4c48a;min-height:1.8em"></div>
                 </div>
@@ -244,23 +248,23 @@ const PersonalTemplates = {
             <!-- Deadline -->
             <div class="tpl-section">
                 <div class="tpl-line-labeled">
-                    <span class="label">Decision needed by:</span>
+                    <span class="label">${t('decision.deadline2')}</span>
                     <div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em;max-width:150px"></div>
                 </div>
             </div>
 
             <!-- Pros vs Cons -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">⚖️</span> Pros vs Cons</div>
+                <div class="tpl-section-title"><span class="icon">⚖️</span> ${t('decision.options')}</div>
                 <div class="tpl-2col">
                     <div class="tpl-box" style="border-color:#27ae60">
-                        <div class="tpl-box-title" style="color:#27ae60">✅ Pros (Reasons FOR)</div>
+                        <div class="tpl-box-title" style="color:#27ae60">${t('decision.pros')}</div>
                         <div class="tpl-lines-group">
                             ${repeat(isA5 ? 4 : 6, '<div class="tpl-line"></div>')}
                         </div>
                     </div>
                     <div class="tpl-box" style="border-color:#c0392b">
-                        <div class="tpl-box-title" style="color:#c0392b">❌ Cons (Reasons AGAINST)</div>
+                        <div class="tpl-box-title" style="color:#c0392b">${t('decision.cons')}</div>
                         <div class="tpl-lines-group">
                             ${repeat(isA5 ? 4 : 6, '<div class="tpl-line"></div>')}
                         </div>
@@ -270,21 +274,21 @@ const PersonalTemplates = {
 
             <!-- Weighted Decision Matrix -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">📊</span> Weighted Decision Matrix</div>
-                <p style="font-size:0.65rem;color:#999;margin-bottom:0.3rem">Rate each factor 1–10. Weight each by importance (1–5). Score = Rating × Weight.</p>
+                <div class="tpl-section-title"><span class="icon">📊</span> ${t('decision.matrix')}</div>
+                <p style="font-size:0.65rem;color:#999;margin-bottom:0.3rem">${t('decision.matrixHint')}</p>
                 <table class="tpl-table">
                     <thead>
                         <tr>
-                            <th>Factor</th>
-                            <th style="width:55px">Weight</th>
-                            <th style="width:70px">Option A</th>
-                            <th style="width:70px">Option B</th>
+                            <th>${t('decision.factor')}</th>
+                            <th style="width:55px">${t('decision.weight')}</th>
+                            <th style="width:70px">${t('decision.option')} A</th>
+                            <th style="width:70px">${t('decision.option')} B</th>
                         </tr>
                     </thead>
                     <tbody>
                         ${repeat(factorCount, '<tr><td class="wide"></td><td></td><td></td><td></td></tr>')}
                         <tr style="font-weight:700;background:#f8f7f4">
-                            <td style="text-align:right">TOTAL SCORE</td>
+                            <td style="text-align:right">${t('decision.totalScore')}</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -295,13 +299,13 @@ const PersonalTemplates = {
 
             <!-- Important Questions -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">💡</span> Key Questions</div>
+                <div class="tpl-section-title"><span class="icon">💡</span> ${t('decision.bestCase')}</div>
                 <div class="tpl-box">
-                    <div class="tpl-box-title">What would I choose if fear wasn't a factor?</div>
+                    <div class="tpl-box-title">${t('decision.gut')}</div>
                     <div class="tpl-line"></div>
-                    <div class="tpl-box-title" style="margin-top:0.3rem">In 5 years, which choice will I regret NOT making?</div>
+                    <div class="tpl-box-title" style="margin-top:0.3rem">${t('decision.values')}</div>
                     <div class="tpl-line"></div>
-                    <div class="tpl-box-title" style="margin-top:0.3rem">What's the worst thing that could happen? Can I live with it?</div>
+                    <div class="tpl-box-title" style="margin-top:0.3rem">${t('decision.worstCase')}</div>
                     <div class="tpl-line"></div>
                 </div>
             </div>
@@ -309,53 +313,54 @@ const PersonalTemplates = {
             <!-- My Decision -->
             <div class="tpl-section">
                 <div class="tpl-highlight-box">
-                    <div class="tpl-box-title" style="text-align:center">✅ MY DECISION</div>
+                    <div class="tpl-box-title" style="text-align:center">${t('decision.chosen')}</div>
                     <div class="tpl-line" style="border-color:#d4c48a;min-height:1.5em"></div>
-                    <div class="tpl-box-title" style="margin-top:0.3rem;text-align:center">First action step:</div>
+                    <div class="tpl-box-title" style="margin-top:0.3rem;text-align:center">${t('decision.nextSteps')}</div>
                     <div class="tpl-line" style="border-color:#d4c48a"></div>
                 </div>
             </div>
 
-            <div class="tpl-mantra">Indecision is a decision — to stay stuck. Choose and move.</div>
+            <div class="tpl-mantra">${t('decision.mantra')}</div>
         </div>`;
     },
 
     // ─── Emergency Reference Sheet ──────────────────────────────
     'emergency-ref': function (date, paperSize) {
         const isA5 = paperSize === 'a5';
+        const dir = I18N.getDir();
 
         return `
-        <div class="template-page ${isA5 ? 'a5' : ''}" id="emergency-ref">
+        <div class="template-page ${isA5 ? 'a5' : ''}" dir="${dir}" id="emergency-ref">
             <div class="tpl-header">
                 <div>
-                    <h2>Emergency Reference</h2>
-                    <div class="tpl-subtitle">Everything important, in one place, offline.</div>
+                    <h2>${t('emergency.title')}</h2>
+                    <div class="tpl-subtitle">${t('emergency.subtitle')}</div>
                 </div>
             </div>
 
             <!-- Personal Info -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">👤</span> Personal Information</div>
+                <div class="tpl-section-title"><span class="icon">👤</span> ${t('emergency.personal')}</div>
                 <div class="tpl-box">
-                    <div class="tpl-line-labeled"><span class="label">Full name:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
-                    <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">Date of birth:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
-                    <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">Blood type:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
-                    <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">Allergies:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
-                    <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">Medications:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
-                    <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">Medical conditions:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                    <div class="tpl-line-labeled"><span class="label">${t('emergency.name')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                    <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">${t('emergency.dob')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                    <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">${t('emergency.blood')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                    <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">${t('emergency.allergies')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                    <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">${t('emergency.medications')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                    <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">${t('emergency.conditions')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
                 </div>
             </div>
 
             <!-- Emergency Contacts -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">📞</span> Emergency Contacts</div>
+                <div class="tpl-section-title"><span class="icon">📞</span> ${t('emergency.contacts')}</div>
                 <table class="tpl-table">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Relationship</th>
-                            <th>Phone</th>
-                            <th>Alt Phone</th>
+                            <th>${t('emergency.contact')}</th>
+                            <th>${t('emergency.relation')}</th>
+                            <th>${t('emergency.phone')}</th>
+                            <th>${t('emergency.number')}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -366,32 +371,32 @@ const PersonalTemplates = {
 
             <!-- Important Numbers -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🏥</span> Important Numbers & Addresses</div>
+                <div class="tpl-section-title"><span class="icon">🏥</span> ${t('emergency.importantNumbers')}</div>
                 <div class="${isA5 ? '' : 'tpl-2col'}">
                     <div class="tpl-box">
-                        <div class="tpl-line-labeled"><span class="label">Doctor:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
-                        <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">Dentist:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
-                        <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">Hospital:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
-                        <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">Pharmacy:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                        <div class="tpl-line-labeled"><span class="label">${t('emergency.provider')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                        <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">${t('emergency.dentist')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                        <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">${t('emergency.hospital')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                        <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">${t('emergency.pharmacy')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
                     </div>
                     <div class="tpl-box">
-                        <div class="tpl-line-labeled"><span class="label">Insurance #:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
-                        <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">ID / Passport:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
-                        <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">Bank:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
-                        <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">Landlord:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                        <div class="tpl-line-labeled"><span class="label">${t('emergency.insurance')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                        <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">${t('emergency.policy')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                        <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">${t('emergency.bank')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                        <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">${t('emergency.landlord')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
                     </div>
                 </div>
             </div>
 
             <!-- Important Accounts (offline reference) -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🔑</span> Key Accounts (for offline reference)</div>
+                <div class="tpl-section-title"><span class="icon">🔑</span> ${t('emergency.keyAccounts')}</div>
                 <table class="tpl-table">
                     <thead>
                         <tr>
-                            <th>Service / Account</th>
-                            <th>Username / Email</th>
-                            <th>Hint / Recovery</th>
+                            <th>${t('emergency.service')}</th>
+                            <th>${t('emergency.username')}</th>
+                            <th>${t('emergency.recovery')}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -402,15 +407,15 @@ const PersonalTemplates = {
 
             <!-- Home Info -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🏠</span> Home Info</div>
+                <div class="tpl-section-title"><span class="icon">🏠</span> ${t('emergency.notes')}</div>
                 <div class="tpl-box">
-                    <div class="tpl-line-labeled"><span class="label">Address:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
-                    <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">WiFi name:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
-                    <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">WiFi password:</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                    <div class="tpl-line-labeled"><span class="label">${t('emergency.address')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                    <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">${t('emergency.wifi')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
+                    <div class="tpl-line-labeled" style="margin-top:0.2rem"><span class="label">${t('emergency.wifiPass')}</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div></div>
                 </div>
             </div>
 
-            <div class="tpl-mantra">Keep this sheet safe. Update it regularly. It's your offline lifeline.</div>
+            <div class="tpl-mantra">${t('emergency.mantra')}</div>
         </div>`;
     }
 };

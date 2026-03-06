@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,7 @@
     <title>Inkpath — Print Your Path to Productivity</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/rtl.css">
     <link rel="stylesheet" href="css/print.css" media="print">
     <link rel="stylesheet" href="css/templates.css">
 </head>
@@ -31,76 +32,85 @@
                 </svg>
                 <h1>Inkpath</h1>
             </div>
-            <p class="tagline">Print your path to productivity. No screens needed.</p>
+            <p class="tagline" data-i18n="ui.tagline">Print your path to productivity. No screens needed.</p>
         </div>
     </header>
 
     <nav class="controls no-print">
         <div class="controls-inner">
+            <!-- Language -->
+            <div class="control-group">
+                <label for="lang-select" data-i18n="ui.language">Language</label>
+                <select id="lang-select">
+                    <option value="en" selected>English</option>
+                    <option value="ar">العربية</option>
+                </select>
+            </div>
+
             <!-- Template Selector -->
             <div class="control-group">
-                <label for="template-select">Template</label>
+                <label for="template-select" data-i18n="ui.template">Template</label>
                 <select id="template-select">
-                    <optgroup label="Daily">
-                        <option value="daily-planner">Daily Planner</option>
-                        <option value="daily-timeblock">Daily Time Blocker</option>
-                        <option value="daily-focus">Deep Focus Day</option>
+                    <optgroup label="Daily" data-i18n-label="opt.daily">
+                        <option value="daily-planner" data-i18n="opt.dailyPlanner">Daily Planner</option>
+                        <option value="daily-timeblock" data-i18n="opt.dailyTimeblock">Daily Time Blocker</option>
+                        <option value="daily-focus" data-i18n="opt.dailyFocus">Deep Focus Day</option>
                     </optgroup>
-                    <optgroup label="Weekly">
-                        <option value="weekly-planner">Weekly Planner</option>
-                        <option value="weekly-habits">Weekly Habit Tracker</option>
-                        <option value="weekly-review">Weekly Review</option>
+                    <optgroup label="Weekly" data-i18n-label="opt.weekly">
+                        <option value="weekly-planner" data-i18n="opt.weeklyPlanner">Weekly Planner</option>
+                        <option value="weekly-habits" data-i18n="opt.weeklyHabits">Weekly Habit Tracker</option>
+                        <option value="weekly-review" data-i18n="opt.weeklyReview">Weekly Review</option>
                     </optgroup>
-                    <optgroup label="Monthly">
-                        <option value="monthly-planner">Monthly Planner</option>
-                        <option value="monthly-goals">Monthly Goal Setter</option>
-                        <option value="monthly-habits">Monthly Habit Grid</option>
+                    <optgroup label="Monthly" data-i18n-label="opt.monthly">
+                        <option value="monthly-planner" data-i18n="opt.monthlyPlanner">Monthly Planner</option>
+                        <option value="monthly-goals" data-i18n="opt.monthlyGoals">Monthly Goal Setter</option>
+                        <option value="monthly-habits" data-i18n="opt.monthlyHabits">Monthly Habit Grid</option>
                     </optgroup>
-                    <optgroup label="Anti-Procrastination">
-                        <option value="procrastination-buster">Procrastination Buster</option>
-                        <option value="accountability-sheet">Accountability Sheet</option>
+                    <optgroup label="Anti-Procrastination" data-i18n-label="opt.antiProcrastination">
+                        <option value="procrastination-buster" data-i18n="opt.procrastinationBuster">Procrastination Buster</option>
+                        <option value="accountability-sheet" data-i18n="opt.accountabilitySheet">Accountability Sheet</option>
                     </optgroup>
-                    <optgroup label="Yearly & Vision">
-                        <option value="yearly-vision">Annual Vision Board</option>
-                        <option value="quarterly-planner">Quarterly Planner</option>
+                    <optgroup label="Yearly & Vision" data-i18n-label="opt.yearlyVision">
+                        <option value="yearly-vision" data-i18n="opt.yearlyVisionBoard">Annual Vision Board</option>
+                        <option value="quarterly-planner" data-i18n="opt.quarterlyPlanner">Quarterly Planner</option>
                     </optgroup>
-                    <optgroup label="Finance">
-                        <option value="monthly-budget">Monthly Budget</option>
-                        <option value="expense-log">Expense Log</option>
-                        <option value="savings-goals">Savings Goals Tracker</option>
+                    <optgroup label="Finance" data-i18n-label="opt.finance">
+                        <option value="monthly-budget" data-i18n="opt.monthlyBudget">Monthly Budget</option>
+                        <option value="expense-log" data-i18n="opt.expenseLog">Expense Log</option>
+                        <option value="savings-goals" data-i18n="opt.savingsGoals">Savings Goals Tracker</option>
                     </optgroup>
-                    <optgroup label="Health & Fitness">
-                        <option value="workout-log">Workout Log</option>
-                        <option value="meal-planner">Meal Planner</option>
-                        <option value="sleep-tracker">Sleep Tracker</option>
+                    <optgroup label="Health & Fitness" data-i18n-label="opt.health">
+                        <option value="workout-log" data-i18n="opt.workoutLog">Workout Log</option>
+                        <option value="meal-planner" data-i18n="opt.mealPlanner">Meal Planner</option>
+                        <option value="sleep-tracker" data-i18n="opt.sleepTracker">Sleep Tracker</option>
                     </optgroup>
-                    <optgroup label="Productivity">
-                        <option value="brain-dump">Brain Dump</option>
-                        <option value="project-planner">Project Planner</option>
-                        <option value="routines">Morning & Evening Routines</option>
+                    <optgroup label="Productivity" data-i18n-label="opt.productivity">
+                        <option value="brain-dump" data-i18n="opt.brainDump">Brain Dump</option>
+                        <option value="project-planner" data-i18n="opt.projectPlanner">Project Planner</option>
+                        <option value="routines" data-i18n="opt.routines">Morning & Evening Routines</option>
                     </optgroup>
-                    <optgroup label="Study & Learning">
-                        <option value="study-session">Study Session Planner</option>
-                        <option value="exam-countdown">Exam Countdown Planner</option>
-                        <option value="cornell-notes">Cornell Notes</option>
-                        <option value="spaced-repetition">Spaced Repetition Tracker</option>
-                        <option value="study-timetable">Weekly Study Timetable</option>
-                        <option value="assignment-tracker">Assignment Tracker</option>
-                        <option value="subject-review">Subject Review Sheet</option>
+                    <optgroup label="Study & Learning" data-i18n-label="opt.study">
+                        <option value="study-session" data-i18n="opt.studySession">Study Session Planner</option>
+                        <option value="exam-countdown" data-i18n="opt.examCountdown">Exam Countdown Planner</option>
+                        <option value="cornell-notes" data-i18n="opt.cornellNotes">Cornell Notes</option>
+                        <option value="spaced-repetition" data-i18n="opt.spacedRepetition">Spaced Repetition Tracker</option>
+                        <option value="study-timetable" data-i18n="opt.studyTimetable">Weekly Study Timetable</option>
+                        <option value="assignment-tracker" data-i18n="opt.assignmentTracker">Assignment Tracker</option>
+                        <option value="subject-review" data-i18n="opt.subjectReview">Subject Review Sheet</option>
                     </optgroup>
-                    <optgroup label="Personal Growth">
-                        <option value="journal">Gratitude & Mood Journal</option>
-                        <option value="reading-log">Reading & Learning Log</option>
-                        <option value="relationships">Relationships & Social</option>
-                        <option value="decision-maker">Decision Maker</option>
-                        <option value="emergency-ref">Emergency Reference</option>
+                    <optgroup label="Personal Growth" data-i18n-label="opt.personal">
+                        <option value="journal" data-i18n="opt.journal">Gratitude & Mood Journal</option>
+                        <option value="reading-log" data-i18n="opt.readingLog">Reading & Learning Log</option>
+                        <option value="relationships" data-i18n="opt.relationships">Relationships & Social</option>
+                        <option value="decision-maker" data-i18n="opt.decisionMaker">Decision Maker</option>
+                        <option value="emergency-ref" data-i18n="opt.emergencyRef">Emergency Reference</option>
                     </optgroup>
                 </select>
             </div>
 
             <!-- Paper Size -->
             <div class="control-group">
-                <label for="paper-size">Paper Size</label>
+                <label for="paper-size" data-i18n="ui.paperSize">Paper Size</label>
                 <select id="paper-size">
                     <option value="a4" selected>A4 (210 × 297 mm)</option>
                     <option value="a5">A5 (148 × 210 mm)</option>
@@ -109,26 +119,26 @@
 
             <!-- Date Picker -->
             <div class="control-group">
-                <label for="start-date">Start Date</label>
+                <label for="start-date" data-i18n="ui.startDate">Start Date</label>
                 <input type="date" id="start-date">
             </div>
 
             <!-- Theme -->
             <div class="control-group">
-                <label for="theme-select">Style</label>
+                <label for="theme-select" data-i18n="ui.style">Style</label>
                 <select id="theme-select">
-                    <option value="minimal" selected>Minimal</option>
-                    <option value="lined">Lined</option>
-                    <option value="dotgrid">Dot Grid</option>
+                    <option value="minimal" selected data-i18n="ui.minimal">Minimal</option>
+                    <option value="lined" data-i18n="ui.lined">Lined</option>
+                    <option value="dotgrid" data-i18n="ui.dotGrid">Dot Grid</option>
                 </select>
             </div>
 
             <!-- Actions -->
             <div class="control-group actions">
-                <button id="btn-generate" class="btn btn-primary">Generate</button>
-                <button id="btn-print" class="btn btn-secondary">🖨️ Print</button>
-                <button id="btn-pdf" class="btn btn-accent" disabled>📄 Export PDF</button>
-                <button id="btn-word" class="btn btn-accent" disabled>📝 Export Word</button>
+                <button id="btn-generate" class="btn btn-primary" data-i18n="ui.generate">Generate</button>
+                <button id="btn-print" class="btn btn-secondary" data-i18n="ui.print">🖨️ Print</button>
+                <button id="btn-pdf" class="btn btn-accent" disabled data-i18n="ui.exportPdf">📄 Export PDF</button>
+                <button id="btn-word" class="btn btn-accent" disabled data-i18n="ui.exportWord">📝 Export Word</button>
             </div>
         </div>
     </nav>
@@ -147,8 +157,8 @@
                     <line x1="32" y1="44" x2="32" y2="52" stroke="#ddd" stroke-width="2"/>
                     <line x1="28" y1="48" x2="36" y2="48" stroke="#ddd" stroke-width="2"/>
                 </svg>
-                <h2>Choose a template and hit Generate</h2>
-                <p>Your printable planner page will appear here</p>
+                <h2 data-i18n="ui.emptyTitle">Choose a template and hit Generate</h2>
+                <p data-i18n="ui.emptySubtitle">Your printable planner page will appear here</p>
             </div>
         </div>
     </main>
@@ -160,6 +170,7 @@
 
     <!-- Scripts -->
     <script src="js/lib/html2pdf.bundle.min.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/version.js"></script>
     <script src="js/templates/daily.js"></script>
     <script src="js/templates/weekly.js"></script>

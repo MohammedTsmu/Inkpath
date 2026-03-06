@@ -1,6 +1,6 @@
 {
     "name": "inkpath",
-    "version": "3.1.0",
+    "version": "3.2.0",
     "description": "Print your path to productivity. 34 printable A4/A5 planner templates for daily planning, studying, exams, finance, health & more. Export to PDF or Word.",
     "main": "main.js",
     "scripts": {

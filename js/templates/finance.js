@@ -7,41 +7,41 @@ const FinanceTemplates = {
     // ─── Monthly Budget Tracker ─────────────────────────────────
     'monthly-budget': function (date, paperSize) {
         const isA5 = paperSize === 'a5';
-        const monthName = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        const monthName = I18N.getMonthName(date);
 
         const incomeRows = isA5 ? 3 : 5;
         const expenseCategories = [
-            'Rent / Housing', 'Utilities', 'Groceries / Food', 'Transport',
-            'Phone / Internet', 'Insurance', 'Subscriptions', 'Clothing',
-            'Entertainment', 'Healthcare', 'Savings / Invest', 'Debt Repayment'
+            t('budget.rent'), t('budget.utilities'), t('budget.groceries'), t('budget.transport'),
+            t('budget.phone'), t('budget.insurance'), t('budget.subscriptions'), t('budget.clothing'),
+            t('budget.entertainment'), t('budget.healthcare'), t('budget.savings'), t('budget.debt')
         ];
         const catCount = isA5 ? 8 : 12;
 
         return `
-        <div class="template-page ${isA5 ? 'a5' : ''}" id="monthly-budget">
+        <div class="template-page ${isA5 ? 'a5' : ''}" dir="${I18N.getDir()}" id="monthly-budget">
             <div class="tpl-header">
                 <div>
-                    <h2>Monthly Budget</h2>
-                    <div class="tpl-subtitle">Know where every dollar goes.</div>
+                    <h2>${t('budget.title')}</h2>
+                    <div class="tpl-subtitle">${t('budget.subtitle')}</div>
                 </div>
                 <div class="tpl-date">${monthName}</div>
             </div>
 
             <!-- Income -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">💵</span> Income</div>
+                <div class="tpl-section-title"><span class="icon">💵</span> ${t('budget.income')}</div>
                 <table class="tpl-table">
                     <thead>
                         <tr>
-                            <th>Source</th>
-                            <th style="width:90px">Expected</th>
-                            <th style="width:90px">Actual</th>
+                            <th>${t('budget.source')}</th>
+                            <th style="width:90px">${t('budget.expected')}</th>
+                            <th style="width:90px">${t('budget.actual')}</th>
                         </tr>
                     </thead>
                     <tbody>
                         ${repeat(incomeRows, '<tr><td class="wide"></td><td></td><td></td></tr>')}
                         <tr style="font-weight:700;background:#f8f7f4">
-                            <td style="text-align:right">TOTAL INCOME</td>
+                            <td style="text-align:right">${t('budget.totalIncome')}</td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -51,14 +51,14 @@ const FinanceTemplates = {
 
             <!-- Expenses -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">💸</span> Expenses</div>
+                <div class="tpl-section-title"><span class="icon">💸</span> ${t('budget.expenses')}</div>
                 <table class="tpl-table">
                     <thead>
                         <tr>
-                            <th>Category</th>
-                            <th style="width:80px">Budget</th>
-                            <th style="width:80px">Actual</th>
-                            <th style="width:70px">+/-</th>
+                            <th>${t('budget.category')}</th>
+                            <th style="width:80px">${t('budget.budgetCol')}</th>
+                            <th style="width:80px">${t('budget.actual')}</th>
+                            <th style="width:70px">${t('budget.diff')}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,7 +70,7 @@ const FinanceTemplates = {
                             <td></td>
                         </tr>`).join('')}
                         <tr style="font-weight:700;background:#f8f7f4">
-                            <td style="text-align:right">TOTAL EXPENSES</td>
+                            <td style="text-align:right">${t('budget.totalExpenses')}</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -83,15 +83,15 @@ const FinanceTemplates = {
             <div class="tpl-section">
                 <div class="${isA5 ? '' : 'tpl-3col'}">
                     <div class="tpl-highlight-box">
-                        <div class="tpl-box-title" style="text-align:center">Total Income</div>
+                        <div class="tpl-box-title" style="text-align:center">${t('budget.totalIncomeLabel')}</div>
                         <div class="tpl-line" style="border-color:#d4c48a;text-align:center;min-height:1.8em"></div>
                     </div>
                     <div class="tpl-highlight-box">
-                        <div class="tpl-box-title" style="text-align:center">Total Expenses</div>
+                        <div class="tpl-box-title" style="text-align:center">${t('budget.totalExpensesLabel')}</div>
                         <div class="tpl-line" style="border-color:#d4c48a;text-align:center;min-height:1.8em"></div>
                     </div>
                     <div class="tpl-highlight-box">
-                        <div class="tpl-box-title" style="text-align:center">Net (Saved)</div>
+                        <div class="tpl-box-title" style="text-align:center">${t('budget.netSaved')}</div>
                         <div class="tpl-line" style="border-color:#d4c48a;text-align:center;min-height:1.8em"></div>
                     </div>
                 </div>
@@ -99,29 +99,29 @@ const FinanceTemplates = {
 
             <!-- Financial Notes -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">📝</span> Notes & Adjustments</div>
+                <div class="tpl-section-title"><span class="icon">📝</span> ${t('budget.notesAdj')}</div>
                 <div class="tpl-lines-group">
                     ${repeat(isA5 ? 2 : 3, '<div class="tpl-line"></div>')}
                 </div>
             </div>
 
-            <div class="tpl-mantra">A budget tells your money where to go instead of wondering where it went.</div>
+            <div class="tpl-mantra">${t('budget.mantra')}</div>
         </div>`;
     },
 
     // ─── Daily Expense Log ──────────────────────────────────────
     'expense-log': function (date, paperSize) {
         const isA5 = paperSize === 'a5';
-        const monthName = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        const monthName = I18N.getMonthName(date);
         const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
         const rowCount = isA5 ? 15 : Math.min(daysInMonth, 25);
 
         return `
-        <div class="template-page ${isA5 ? 'a5' : ''}" id="expense-log">
+        <div class="template-page ${isA5 ? 'a5' : ''}" dir="${I18N.getDir()}" id="expense-log">
             <div class="tpl-header">
                 <div>
-                    <h2>Expense Log</h2>
-                    <div class="tpl-subtitle">Track every purchase. Awareness = control.</div>
+                    <h2>${t('expense.title')}</h2>
+                    <div class="tpl-subtitle">${t('expense.subtitle')}</div>
                 </div>
                 <div class="tpl-date">${monthName}</div>
             </div>
@@ -130,11 +130,11 @@ const FinanceTemplates = {
                 <table class="tpl-table" style="font-size:${isA5 ? '0.6rem' : '0.7rem'}">
                     <thead>
                         <tr>
-                            <th style="width:40px">Date</th>
-                            <th>Description</th>
-                            <th style="width:70px">Category</th>
-                            <th style="width:65px">Amount</th>
-                            <th style="width:45px">Need?</th>
+                            <th style="width:40px">${t('expense.date')}</th>
+                            <th>${t('expense.description')}</th>
+                            <th style="width:70px">${t('expense.category')}</th>
+                            <th style="width:65px">${t('expense.amount')}</th>
+                            <th style="width:45px">${t('expense.need')}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -147,7 +147,7 @@ const FinanceTemplates = {
                             <td></td>
                         </tr>`)}
                         <tr style="font-weight:700;background:#f8f7f4">
-                            <td colspan="3" style="text-align:right">MONTHLY TOTAL</td>
+                            <td colspan="3" style="text-align:right">${t('expense.monthlyTotal')}</td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -157,20 +157,20 @@ const FinanceTemplates = {
 
             <div class="${isA5 ? '' : 'tpl-2col'}">
                 <div class="tpl-section">
-                    <div class="tpl-section-title"><span class="icon">⚠️</span> Unnecessary Spending</div>
+                    <div class="tpl-section-title"><span class="icon">⚠️</span> ${t('expense.unnecessarySpending')}</div>
                     <div class="tpl-lines-group">
                         ${repeat(2, '<div class="tpl-line"></div>')}
                     </div>
                 </div>
                 <div class="tpl-section">
-                    <div class="tpl-section-title"><span class="icon">💡</span> Money Saving Ideas</div>
+                    <div class="tpl-section-title"><span class="icon">💡</span> ${t('expense.savingIdeas')}</div>
                     <div class="tpl-lines-group">
                         ${repeat(2, '<div class="tpl-line"></div>')}
                     </div>
                 </div>
             </div>
 
-            <div class="tpl-mantra">Every dollar has a job. Make them work for you.</div>
+            <div class="tpl-mantra">${t('expense.mantra')}</div>
         </div>`;
     },
 
@@ -179,39 +179,43 @@ const FinanceTemplates = {
         const isA5 = paperSize === 'a5';
         const year = date.getFullYear();
         const goalCount = isA5 ? 3 : 4;
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const months = [
+            t('month.janShort'), t('month.febShort'), t('month.marShort'), t('month.aprShort'),
+            t('month.mayShort'), t('month.junShort'), t('month.julShort'), t('month.augShort'),
+            t('month.sepShort'), t('month.octShort'), t('month.novShort'), t('month.decShort')
+        ];
 
         return `
-        <div class="template-page ${isA5 ? 'a5' : ''}" id="savings-goals">
+        <div class="template-page ${isA5 ? 'a5' : ''}" dir="${I18N.getDir()}" id="savings-goals">
             <div class="tpl-header">
                 <div>
-                    <h2>Savings Goals Tracker</h2>
-                    <div class="tpl-subtitle">Set it. Track it. Reach it.</div>
+                    <h2>${t('savings.title')}</h2>
+                    <div class="tpl-subtitle">${t('savings.subtitle')}</div>
                 </div>
                 <div class="tpl-date">${year}</div>
             </div>
 
             <!-- Savings Goals -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🎯</span> My Savings Goals</div>
+                <div class="tpl-section-title"><span class="icon">🎯</span> ${t('savings.myGoals')}</div>
                 ${repeat(goalCount, (i) => `
                 <div class="tpl-box" style="margin-bottom:0.6rem">
                     <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.3rem">
                         <span class="tpl-priority ${i === 0 ? 'high' : i === 1 ? 'medium' : 'low'}">${i + 1}</span>
-                        <span class="label" style="font-size:0.65rem;color:#888">Goal:</span>
+                        <span class="label" style="font-size:0.65rem;color:#888">${t('savings.goal')}</span>
                         <div style="flex:1;border-bottom:1px solid #e0ddd8;min-height:1em"></div>
                     </div>
                     <div style="display:flex;gap:1rem;margin-bottom:0.3rem">
                         <div class="tpl-line-labeled">
-                            <span class="label">Target: $</span>
+                            <span class="label">${t('savings.target')}</span>
                             <div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em;min-width:60px"></div>
                         </div>
                         <div class="tpl-line-labeled">
-                            <span class="label">Deadline:</span>
+                            <span class="label">${t('savings.deadline')}</span>
                             <div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em;min-width:60px"></div>
                         </div>
                     </div>
-                    <div class="tpl-box-title">Monthly progress:</div>
+                    <div class="tpl-box-title">${t('savings.monthlyProgress')}</div>
                     <div class="tpl-progress-bar">
                         ${repeat(12, (m) => `<div class="tpl-progress-segment" title="${months[m]}"></div>`)}
                     </div>
@@ -223,28 +227,28 @@ const FinanceTemplates = {
 
             <!-- Net Worth Snapshot -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">📊</span> Net Worth Snapshot</div>
+                <div class="tpl-section-title"><span class="icon">📊</span> ${t('savings.netWorth')}</div>
                 <div class="${isA5 ? '' : 'tpl-2col'}">
                     <div class="tpl-box">
-                        <div class="tpl-box-title">Assets (What I Own)</div>
+                        <div class="tpl-box-title">${t('savings.assets')}</div>
                         ${repeat(isA5 ? 3 : 4, '<div class="tpl-line"></div>')}
                         <div class="tpl-line-labeled" style="margin-top:0.3rem;font-weight:600">
-                            <span class="label">Total:</span>
+                            <span class="label">${t('savings.total')}</span>
                             <div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div>
                         </div>
                     </div>
                     <div class="tpl-box">
-                        <div class="tpl-box-title">Debts (What I Owe)</div>
+                        <div class="tpl-box-title">${t('savings.debts')}</div>
                         ${repeat(isA5 ? 3 : 4, '<div class="tpl-line"></div>')}
                         <div class="tpl-line-labeled" style="margin-top:0.3rem;font-weight:600">
-                            <span class="label">Total:</span>
+                            <span class="label">${t('savings.total')}</span>
                             <div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1em"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="tpl-mantra">Pay yourself first. Your future self will thank you.</div>
+            <div class="tpl-mantra">${t('savings.mantra')}</div>
         </div>`;
     }
 };

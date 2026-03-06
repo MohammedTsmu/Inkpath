@@ -10,6 +10,7 @@
     const paperSizeSelect = document.getElementById('paper-size');
     const startDateInput = document.getElementById('start-date');
     const themeSelect = document.getElementById('theme-select');
+    const langSelect = document.getElementById('lang-select');
     const btnGenerate = document.getElementById('btn-generate');
     const btnPrint = document.getElementById('btn-print');
     const btnPdf = document.getElementById('btn-pdf');
@@ -39,8 +40,11 @@
         const today = new Date();
         startDateInput.value = formatInputDate(today);
 
-        // Load saved preferences
+        // Load saved preferences (including language)
         loadPreferences();
+
+        // Apply language on initial load
+        applyLanguage(I18N.getLang());
 
         // Event listeners
         btnGenerate.addEventListener('click', generate);
@@ -50,6 +54,7 @@
         paperSizeSelect.addEventListener('change', onPaperSizeChange);
         templateSelect.addEventListener('change', savePreferences);
         themeSelect.addEventListener('change', savePreferences);
+        langSelect.addEventListener('change', onLanguageChange);
 
         // Keyboard shortcut: Ctrl+P to print
         document.addEventListener('keydown', function (e) {
@@ -145,7 +150,7 @@
 
         // Show loading state
         const originalText = btnPdf.textContent;
-        btnPdf.textContent = '⏳ Exporting...';
+        btnPdf.textContent = t('ui.exporting');
         btnPdf.disabled = true;
 
         // Check if running in Electron
@@ -225,7 +230,7 @@
             html2pdf().set(opt).from(clone).save()
                 .then(function () {
                     document.body.removeChild(wrapper);
-                    btnPdf.textContent = '✅ Saved!';
+                    btnPdf.textContent = t('ui.saved');
                     setTimeout(function () {
                         btnPdf.textContent = originalBtnText;
                         btnPdf.disabled = false;
@@ -234,7 +239,7 @@
                 .catch(function (err) {
                     console.error('PDF export failed:', err);
                     document.body.removeChild(wrapper);
-                    btnPdf.textContent = '❌ Failed';
+                    btnPdf.textContent = t('ui.failed');
                     setTimeout(function () {
                         btnPdf.textContent = originalBtnText;
                         btnPdf.disabled = false;
@@ -257,7 +262,7 @@
                 pageSize: paperSize === 'a5' ? { width: 148000, height: 210000 } : 'A4',
                 printBackground: true
             }).then(function () {
-                btnPdf.textContent = '✅ Saved!';
+                btnPdf.textContent = t('ui.saved');
                 setTimeout(function () {
                     btnPdf.textContent = originalBtnText;
                     btnPdf.disabled = false;
@@ -286,7 +291,7 @@
 
         // Show loading state
         const originalText = btnWord.textContent;
-        btnWord.textContent = '⏳ Exporting...';
+        btnWord.textContent = t('ui.exporting');
         btnWord.disabled = true;
 
         // Gather CSS from all stylesheets
@@ -489,7 +494,7 @@
         URL.revokeObjectURL(link.href);
 
         // Reset button
-        btnWord.textContent = '✅ Saved!';
+        btnWord.textContent = t('ui.saved');
         setTimeout(function () {
             btnWord.textContent = originalText;
             btnWord.disabled = false;
@@ -505,12 +510,63 @@
         savePreferences();
     }
 
+    // ─── Language Switching ─────────────────────────────────────
+    function onLanguageChange() {
+        var lang = langSelect.value;
+        applyLanguage(lang);
+        savePreferences();
+
+        // Re-generate template if one is showing
+        if (!templateContainer.querySelector('.empty-state')) {
+            generate();
+        }
+    }
+
+    function applyLanguage(lang) {
+        I18N.setLang(lang);
+        var dir = I18N.getDir();
+        document.documentElement.setAttribute('dir', dir);
+        document.documentElement.setAttribute('lang', lang);
+        translateUI();
+    }
+
+    function translateUI() {
+        // Translate elements with data-i18n attribute
+        var els = document.querySelectorAll('[data-i18n]');
+        for (var i = 0; i < els.length; i++) {
+            var key = els[i].getAttribute('data-i18n');
+            if (key) els[i].textContent = t(key);
+        }
+
+        // Translate optgroup labels
+        var optgroups = document.querySelectorAll('[data-i18n-label]');
+        for (var j = 0; j < optgroups.length; j++) {
+            var key2 = optgroups[j].getAttribute('data-i18n-label');
+            if (key2) optgroups[j].label = t(key2);
+        }
+
+        // Translate select option text
+        var opts = templateSelect.querySelectorAll('option[data-i18n]');
+        for (var k = 0; k < opts.length; k++) {
+            var key3 = opts[k].getAttribute('data-i18n');
+            if (key3) opts[k].textContent = t(key3);
+        }
+
+        // Translate buttons
+        var btns = document.querySelectorAll('button[data-i18n]');
+        for (var b = 0; b < btns.length; b++) {
+            var key4 = btns[b].getAttribute('data-i18n');
+            if (key4) btns[b].textContent = t(key4);
+        }
+    }
+
     // ─── Preferences ────────────────────────────────────────────
     function savePreferences() {
         try {
             localStorage.setItem('lp-template', templateSelect.value);
             localStorage.setItem('lp-paper', paperSizeSelect.value);
             localStorage.setItem('lp-theme', themeSelect.value);
+            localStorage.setItem('lp-lang', langSelect.value);
         } catch (e) {
             // localStorage may not be available
         }
@@ -521,10 +577,15 @@
             const savedTemplate = localStorage.getItem('lp-template');
             const savedPaper = localStorage.getItem('lp-paper');
             const savedTheme = localStorage.getItem('lp-theme');
+            const savedLang = localStorage.getItem('lp-lang');
 
             if (savedTemplate) templateSelect.value = savedTemplate;
             if (savedPaper) paperSizeSelect.value = savedPaper;
             if (savedTheme) themeSelect.value = savedTheme;
+            if (savedLang) {
+                langSelect.value = savedLang;
+                I18N.setLang(savedLang);
+            }
         } catch (e) {
             // localStorage may not be available
         }

@@ -7,46 +7,46 @@ const AntiProcrastinationTemplates = {
     // ─── Procrastination Buster ─────────────────────────────────
     'procrastination-buster': function (date, paperSize) {
         const isA5 = paperSize === 'a5';
-        const dateStr = formatDate(date);
+        const dateStr = I18N.formatDate(date);
 
         return `
-        <div class="template-page ${isA5 ? 'a5' : ''}" id="procrastination-buster">
+        <div class="template-page ${isA5 ? 'a5' : ''}" dir="${I18N.getDir()}" id="procrastination-buster">
             <div class="tpl-header">
                 <div>
-                    <h2>Procrastination Buster</h2>
-                    <div class="tpl-subtitle">Face it. Break it down. Start now.</div>
+                    <h2>${t('procrastination.title')}</h2>
+                    <div class="tpl-subtitle">${t('procrastination.subtitle')}</div>
                 </div>
                 <div class="tpl-date">${dateStr}</div>
             </div>
 
             <div class="tpl-quote-box">
-                "You don't have to feel like doing something to start doing it."
+                "${t('procrastination.quote')}"
             </div>
 
             <!-- Eisenhower Matrix -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">📊</span> Priority Matrix (Eisenhower)</div>
+                <div class="tpl-section-title"><span class="icon">📊</span> ${t('procrastination.priorityMatrix')}</div>
                 <div class="tpl-matrix">
                     <div class="tpl-matrix-cell urgent-important">
-                        <div class="tpl-matrix-label" style="color:#c0392b">⚡ Urgent + Important — DO NOW</div>
+                        <div class="tpl-matrix-label" style="color:#c0392b">⚡ ${t('procrastination.doNow')}</div>
                         <div class="tpl-lines-group">
                             ${repeat(isA5 ? 3 : 4, '<div class="tpl-line"></div>')}
                         </div>
                     </div>
                     <div class="tpl-matrix-cell not-urgent-important">
-                        <div class="tpl-matrix-label" style="color:#e67e22">📅 Not Urgent + Important — SCHEDULE</div>
+                        <div class="tpl-matrix-label" style="color:#e67e22">📅 ${t('procrastination.scheduleIt')}</div>
                         <div class="tpl-lines-group">
                             ${repeat(isA5 ? 3 : 4, '<div class="tpl-line"></div>')}
                         </div>
                     </div>
                     <div class="tpl-matrix-cell urgent-not-important">
-                        <div class="tpl-matrix-label" style="color:#3498db">👋 Urgent + Not Important — DELEGATE</div>
+                        <div class="tpl-matrix-label" style="color:#3498db">👋 ${t('procrastination.delegateIt')}</div>
                         <div class="tpl-lines-group">
                             ${repeat(isA5 ? 3 : 4, '<div class="tpl-line"></div>')}
                         </div>
                     </div>
                     <div class="tpl-matrix-cell not-urgent-not-important">
-                        <div class="tpl-matrix-label" style="color:#95a5a6">🗑️ Not Urgent + Not Important — DROP</div>
+                        <div class="tpl-matrix-label" style="color:#95a5a6">🗑️ ${t('procrastination.dropIt')}</div>
                         <div class="tpl-lines-group">
                             ${repeat(isA5 ? 3 : 4, '<div class="tpl-line"></div>')}
                         </div>
@@ -56,19 +56,19 @@ const AntiProcrastinationTemplates = {
 
             <!-- Task Breakdown -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🔨</span> Task Breakdown (Big Task → Tiny Steps)</div>
+                <div class="tpl-section-title"><span class="icon">🔨</span> ${t('procrastination.breakDown')}</div>
                 <div class="${isA5 ? '' : 'tpl-2col'}">
                     ${repeat(2, `
                     <div class="tpl-box" style="margin-bottom:0.5rem">
-                        <div class="tpl-box-title">Dreaded Task:</div>
+                        <div class="tpl-box-title">${t('procrastination.task')}:</div>
                         <div class="tpl-line"></div>
-                        <div class="tpl-box-title" style="margin-top:0.3rem">Why I'm avoiding it:</div>
+                        <div class="tpl-box-title" style="margin-top:0.3rem">${t('procrastination.avoidBecause')}:</div>
                         <div class="tpl-line"></div>
-                        <div class="tpl-box-title" style="margin-top:0.3rem">Break into 5-min steps:</div>
+                        <div class="tpl-box-title" style="margin-top:0.3rem">${t('procrastination.breakIntoSteps')}:</div>
                         <ul class="tpl-checklist">
                             ${repeat(4, '<li><div class="tpl-checkbox"></div><div class="tpl-check-line"></div></li>')}
                         </ul>
-                        <div class="tpl-box-title" style="margin-top:0.3rem">Reward after completing:</div>
+                        <div class="tpl-box-title" style="margin-top:0.3rem">${t('procrastination.reward')}:</div>
                         <div class="tpl-line"></div>
                     </div>`)}
                 </div>
@@ -76,22 +76,22 @@ const AntiProcrastinationTemplates = {
 
             <!-- Time Traps -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">⏳</span> My Time Traps Today</div>
+                <div class="tpl-section-title"><span class="icon">⏳</span> ${t('procrastination.timeTraps')}</div>
                 <table class="tpl-table">
                     <thead>
                         <tr>
-                            <th>Time Trap</th>
-                            <th style="width:70px">Time Lost</th>
-                            <th>Trigger</th>
-                            <th>Counter-Action</th>
+                            <th>${t('procrastination.timeTrap')}</th>
+                            <th style="width:70px">${t('procrastination.timeLost')}</th>
+                            <th>${t('procrastination.trigger')}</th>
+                            <th>${t('procrastination.counterAction')}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="wide" style="color:#ccc">e.g. YouTube</td>
-                            <td style="color:#ccc">2 hrs</td>
-                            <td class="wide" style="color:#ccc">Boredom</td>
-                            <td class="wide" style="color:#ccc">Read a book</td>
+                            <td class="wide" style="color:#ccc">${t('procrastination.egYouTube')}</td>
+                            <td style="color:#ccc">${t('procrastination.eg2hrs')}</td>
+                            <td class="wide" style="color:#ccc">${t('procrastination.egBoredom')}</td>
+                            <td class="wide" style="color:#ccc">${t('procrastination.egReadBook')}</td>
                         </tr>
                         ${repeat(isA5 ? 3 : 4, '<tr><td class="wide"></td><td></td><td class="wide"></td><td class="wide"></td></tr>')}
                     </tbody>
@@ -101,29 +101,29 @@ const AntiProcrastinationTemplates = {
             <!-- Commitment -->
             <div class="tpl-section">
                 <div class="tpl-highlight-box">
-                    <div class="tpl-box-title" style="text-align:center">⚡ My Commitment Right Now</div>
+                    <div class="tpl-box-title" style="text-align:center">⚡ ${t('procrastination.commitmentNow')}</div>
                     <div style="text-align:center;font-size:0.8rem;color:#666;margin-bottom:0.3rem">
-                        I will work on the FIRST task for just 5 minutes. Starting at: _____
+                        ${t('procrastination.startTiny')}
                     </div>
                 </div>
             </div>
 
-            <div class="tpl-mantra">The hardest part is starting. Once you begin, momentum takes over.</div>
+            <div class="tpl-mantra">${t('procrastination.mantra')}</div>
         </div>`;
     },
 
     // ─── Accountability Sheet ───────────────────────────────────
     'accountability-sheet': function (date, paperSize) {
         const isA5 = paperSize === 'a5';
-        const dateStr = formatDate(date);
-        const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
+        const dateStr = I18N.formatDate(date);
+        const dayName = I18N.getDayName(date);
 
         return `
-        <div class="template-page ${isA5 ? 'a5' : ''}" id="accountability-sheet">
+        <div class="template-page ${isA5 ? 'a5' : ''}" dir="${I18N.getDir()}" id="accountability-sheet">
             <div class="tpl-header">
                 <div>
-                    <h2>Accountability Sheet</h2>
-                    <div class="tpl-subtitle">Be honest with yourself. Track everything.</div>
+                    <h2>${t('accountability.title')}</h2>
+                    <div class="tpl-subtitle">${t('accountability.subtitle')}</div>
                 </div>
                 <div style="text-align:right">
                     <div class="tpl-date">${dayName}</div>
@@ -133,13 +133,13 @@ const AntiProcrastinationTemplates = {
 
             <!-- Morning Commitment -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🌅</span> Morning Commitment (Fill BEFORE the day)</div>
+                <div class="tpl-section-title"><span class="icon">🌅</span> ${t('accountability.morningCommitment')}</div>
                 <div class="tpl-highlight-box">
-                    <div class="tpl-box-title">Today I WILL complete:</div>
+                    <div class="tpl-box-title">${t('accountability.todayGoal')}:</div>
                     <ul class="tpl-checklist">
                         ${repeat(3, '<li><div class="tpl-checkbox"></div><div class="tpl-check-line"></div></li>')}
                     </ul>
-                    <div class="tpl-box-title" style="margin-top:0.3rem">Today I will NOT do:</div>
+                    <div class="tpl-box-title" style="margin-top:0.3rem">${t('accountability.todayNot')}:</div>
                     <ul class="tpl-checklist">
                         ${repeat(3, '<li><div class="tpl-checkbox round"></div><div class="tpl-check-line"></div></li>')}
                     </ul>
@@ -148,14 +148,14 @@ const AntiProcrastinationTemplates = {
 
             <!-- Hourly Check-in -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">⏰</span> Hourly Accountability Log</div>
+                <div class="tpl-section-title"><span class="icon">⏰</span> ${t('accountability.hourlyLog')}</div>
                 <table class="tpl-table">
                     <thead>
                         <tr>
-                            <th style="width:55px">Time</th>
-                            <th>What I Actually Did</th>
-                            <th style="width:${isA5 ? '50px' : '70px'}">Productive?</th>
-                            <th style="width:${isA5 ? '40px' : '60px'}">Screen?</th>
+                            <th style="width:55px">${t('accountability.time')}</th>
+                            <th>${t('accountability.actual')}</th>
+                            <th style="width:${isA5 ? '50px' : '70px'}">${t('accountability.productive')}?</th>
+                            <th style="width:${isA5 ? '40px' : '60px'}">${t('accountability.screen')}?</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -166,26 +166,26 @@ const AntiProcrastinationTemplates = {
 
             <!-- Day Score -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">📊</span> End of Day Score</div>
+                <div class="tpl-section-title"><span class="icon">📊</span> ${t('accountability.score')}</div>
                 <div class="${isA5 ? '' : 'tpl-2col'}">
                     <div class="tpl-box">
-                        <div class="tpl-box-title">Commitments kept: ____ / ____</div>
+                        <div class="tpl-box-title">${t('accountability.commitmentsKept')}: ____ / ____</div>
                         <div class="tpl-progress-bar" style="margin-top:0.3rem">
                             ${repeat(10, '<div class="tpl-progress-segment"></div>')}
                         </div>
-                        <div class="tpl-box-title" style="margin-top:0.5rem">Total productive hours:</div>
+                        <div class="tpl-box-title" style="margin-top:0.5rem">${t('accountability.totalProductiveHours')}:</div>
                         <div class="tpl-line"></div>
-                        <div class="tpl-box-title" style="margin-top:0.3rem">Total screen hours:</div>
+                        <div class="tpl-box-title" style="margin-top:0.3rem">${t('accountability.totalScreenHours')}:</div>
                         <div class="tpl-line"></div>
                     </div>
                     <div class="tpl-box">
-                        <div class="tpl-box-title">Honesty check — Did I:</div>
+                        <div class="tpl-box-title">${t('accountability.honestyCheck')}:</div>
                         <ul class="tpl-checklist">
-                            <li><div class="tpl-checkbox"></div><span class="tpl-check-label">Stick to my time blocks?</span></li>
-                            <li><div class="tpl-checkbox"></div><span class="tpl-check-label">Avoid time wasters?</span></li>
-                            <li><div class="tpl-checkbox"></div><span class="tpl-check-label">Complete #1 priority?</span></li>
-                            <li><div class="tpl-checkbox"></div><span class="tpl-check-label">Stay off screens?</span></li>
-                            <li><div class="tpl-checkbox"></div><span class="tpl-check-label">Go to bed on time?</span></li>
+                            <li><div class="tpl-checkbox"></div><span class="tpl-check-label">${t('accountability.stickToTimeBlocks')}?</span></li>
+                            <li><div class="tpl-checkbox"></div><span class="tpl-check-label">${t('accountability.avoidTimeWasters')}?</span></li>
+                            <li><div class="tpl-checkbox"></div><span class="tpl-check-label">${t('accountability.completePriority')}?</span></li>
+                            <li><div class="tpl-checkbox"></div><span class="tpl-check-label">${t('accountability.stayOffScreens')}?</span></li>
+                            <li><div class="tpl-checkbox"></div><span class="tpl-check-label">${t('accountability.bedOnTime')}?</span></li>
                         </ul>
                     </div>
                 </div>
@@ -193,17 +193,17 @@ const AntiProcrastinationTemplates = {
 
             <!-- Reflection -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">💭</span> Honest Reflection</div>
+                <div class="tpl-section-title"><span class="icon">💭</span> ${t('accountability.honestReflection')}</div>
                 <div class="tpl-box">
-                    <div class="tpl-box-title">What went wrong & why:</div>
+                    <div class="tpl-box-title">${t('accountability.whatWentWrong')}:</div>
                     <div class="tpl-line"></div>
                     <div class="tpl-line"></div>
-                    <div class="tpl-box-title" style="margin-top:0.3rem">What I'll change tomorrow:</div>
+                    <div class="tpl-box-title" style="margin-top:0.3rem">${t('accountability.tomorrowKey')}:</div>
                     <div class="tpl-line"></div>
                 </div>
             </div>
 
-            <div class="tpl-mantra">Accountability is the bridge between goals and accomplishment.</div>
+            <div class="tpl-mantra">${t('accountability.mantra')}</div>
         </div>`;
     }
 };
@@ -211,9 +211,11 @@ const AntiProcrastinationTemplates = {
 // ─── Helpers ────────────────────────────────────────────────
 
 function generateAccountabilityRows(startHour, endHour) {
+    const amLabel = I18N.isRTL() ? 'ص' : 'AM';
+    const pmLabel = I18N.isRTL() ? 'م' : 'PM';
     let html = '';
     for (let h = startHour; h < endHour; h++) {
-        const label = h < 12 ? `${h} AM` : h === 12 ? '12 PM' : `${h - 12} PM`;
+        const label = h < 12 ? `${h} ${amLabel}` : h === 12 ? `12 ${pmLabel}` : `${h - 12} ${pmLabel}`;
         html += `<tr>
             <td style="font-weight:600;font-size:0.72rem;color:#888">${label}</td>
             <td class="wide"></td>

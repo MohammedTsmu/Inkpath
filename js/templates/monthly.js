@@ -7,14 +7,14 @@ const MonthlyTemplates = {
     // ─── Monthly Planner ────────────────────────────────────────
     'monthly-planner': function (date, paperSize) {
         const isA5 = paperSize === 'a5';
-        const monthName = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        const monthName = I18N.getMonthName(date);
 
         return `
-        <div class="template-page ${isA5 ? 'a5' : ''}" id="monthly-planner">
+        <div class="template-page ${isA5 ? 'a5' : ''}" id="monthly-planner" dir="${I18N.getDir()}">
             <div class="tpl-header">
                 <div>
-                    <h2>Monthly Planner</h2>
-                    <div class="tpl-subtitle">See the big picture. Plan with purpose.</div>
+                    <h2>${t('monthly.title')}</h2>
+                    <div class="tpl-subtitle">${t('monthly.subtitle')}</div>
                 </div>
                 <div class="tpl-date">${monthName}</div>
             </div>
@@ -26,7 +26,7 @@ const MonthlyTemplates = {
 
             <!-- Key Dates & Deadlines -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">📅</span> Key Dates & Deadlines</div>
+                <div class="tpl-section-title"><span class="icon">📅</span> ${t('monthly.keyDates')}</div>
                 <div class="${isA5 ? '' : 'tpl-2col'}">
                     <div class="tpl-lines-group">
                         ${repeat(isA5 ? 3 : 4, '<div class="tpl-line-labeled"><span class="label" style="min-width:30px">__/__</span><div class="line" style="border-bottom:1px solid #e0ddd8;flex:1;min-height:1.2em"></div></div>')}
@@ -39,20 +39,20 @@ const MonthlyTemplates = {
 
             <!-- Monthly Focus Areas -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🎯</span> Monthly Focus Areas</div>
+                <div class="tpl-section-title"><span class="icon">🎯</span> ${t('monthly.focusAreas')}</div>
                 <div class="tpl-3col">
                     <div class="tpl-box">
-                        <div class="tpl-box-title">Work / Career</div>
+                        <div class="tpl-box-title">${t('monthly.workCareer')}</div>
                         <div class="tpl-line"></div>
                         <div class="tpl-line"></div>
                     </div>
                     <div class="tpl-box">
-                        <div class="tpl-box-title">Health / Wellness</div>
+                        <div class="tpl-box-title">${t('monthly.healthWellness')}</div>
                         <div class="tpl-line"></div>
                         <div class="tpl-line"></div>
                     </div>
                     <div class="tpl-box">
-                        <div class="tpl-box-title">Personal Growth</div>
+                        <div class="tpl-box-title">${t('monthly.personalGrowth')}</div>
                         <div class="tpl-line"></div>
                         <div class="tpl-line"></div>
                     </div>
@@ -61,34 +61,34 @@ const MonthlyTemplates = {
 
             <!-- Notes -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">📝</span> Notes</div>
+                <div class="tpl-section-title"><span class="icon">📝</span> ${t('monthly.notes')}</div>
                 <div class="tpl-lines-group">
                     ${repeat(isA5 ? 3 : 4, '<div class="tpl-line"></div>')}
                 </div>
             </div>
 
-            <div class="tpl-mantra">A month from now, you'll wish you had started today.</div>
+            <div class="tpl-mantra">${t('monthly.mantra')}</div>
         </div>`;
     },
 
     // ─── Monthly Goal Setter ────────────────────────────────────
     'monthly-goals': function (date, paperSize) {
         const isA5 = paperSize === 'a5';
-        const monthName = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        const monthName = I18N.getMonthName(date);
 
         return `
-        <div class="template-page ${isA5 ? 'a5' : ''}" id="monthly-goals">
+        <div class="template-page ${isA5 ? 'a5' : ''}" id="monthly-goals" dir="${I18N.getDir()}">
             <div class="tpl-header">
                 <div>
-                    <h2>Monthly Goal Setter</h2>
-                    <div class="tpl-subtitle">Set. Plan. Execute. Review.</div>
+                    <h2>${t('mgoals.title')}</h2>
+                    <div class="tpl-subtitle">${t('mgoals.subtitle')}</div>
                 </div>
                 <div class="tpl-date">${monthName}</div>
             </div>
 
             <!-- This Month's Theme -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🌟</span> This Month's Theme / Word</div>
+                <div class="tpl-section-title"><span class="icon">🌟</span> ${t('mgoals.theme')}</div>
                 <div class="tpl-highlight-box">
                     <div class="tpl-line" style="border-color:#d4c48a;min-height:1.8em"></div>
                 </div>
@@ -96,19 +96,19 @@ const MonthlyTemplates = {
 
             <!-- Big 3 Goals -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🎯</span> Big 3 Goals</div>
+                <div class="tpl-section-title"><span class="icon">🎯</span> ${t('mgoals.big3')}</div>
                 ${repeat(3, (i) => `
                 <div class="tpl-box" style="margin-bottom:0.5rem">
                     <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.3rem">
                         <span class="tpl-priority ${i === 0 ? 'high' : i === 1 ? 'medium' : 'low'}">${i + 1}</span>
                         <div style="flex:1;border-bottom:1px solid #e0ddd8;min-height:1.2em"></div>
                     </div>
-                    <div class="tpl-box-title">Key actions:</div>
+                    <div class="tpl-box-title">${t('mgoals.keyActions')}</div>
                     <ul class="tpl-checklist">
                         ${repeat(3, '<li><div class="tpl-checkbox"></div><div class="tpl-check-line"></div></li>')}
                     </ul>
                     <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.3rem">
-                        <span class="label" style="font-size:0.65rem;color:#888">Deadline:</span>
+                        <span class="label" style="font-size:0.65rem;color:#888">${t('mgoals.deadline')}</span>
                         <div style="flex:1;border-bottom:1px solid #e0ddd8;min-height:1em"></div>
                     </div>
                 </div>`)}
@@ -116,15 +116,15 @@ const MonthlyTemplates = {
 
             <!-- Anti-Procrastination Plan -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🛡️</span> Anti-Procrastination Plan</div>
+                <div class="tpl-section-title"><span class="icon">🛡️</span> ${t('mgoals.antiProcrastination')}</div>
                 <div class="${isA5 ? '' : 'tpl-2col'}">
                     <div class="tpl-box">
-                        <div class="tpl-box-title">I tend to procrastinate when:</div>
+                        <div class="tpl-box-title">${t('mgoals.tendToProcrastinate')}</div>
                         <div class="tpl-line"></div>
                         <div class="tpl-line"></div>
                     </div>
                     <div class="tpl-box">
-                        <div class="tpl-box-title">My counter-strategy:</div>
+                        <div class="tpl-box-title">${t('mgoals.counterStrategy')}</div>
                         <div class="tpl-line"></div>
                         <div class="tpl-line"></div>
                     </div>
@@ -133,36 +133,36 @@ const MonthlyTemplates = {
 
             <!-- Reward System -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">🎁</span> Rewards (When I Complete Goals)</div>
+                <div class="tpl-section-title"><span class="icon">🎁</span> ${t('mgoals.rewards')}</div>
                 <div class="tpl-lines-group">
                     ${repeat(3, '<div class="tpl-line"></div>')}
                 </div>
             </div>
 
-            <div class="tpl-mantra">Set the goal. Make the plan. Do the work. Celebrate.</div>
+            <div class="tpl-mantra">${t('mgoals.mantra')}</div>
         </div>`;
     },
 
     // ─── Monthly Habit Grid ─────────────────────────────────────
     'monthly-habits': function (date, paperSize) {
         const isA5 = paperSize === 'a5';
-        const monthName = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        const monthName = I18N.getMonthName(date);
         const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
         const displayDays = isA5 ? Math.min(daysInMonth, 16) : daysInMonth;
         const habitCount = isA5 ? 6 : 10;
 
         const defaultHabits = [
-            'Wake up early', 'Exercise', 'Read', 'No social media',
-            'Hydrate', 'Meditate', 'Journal', 'Screen-free evening',
-            'Healthy eating', 'Plan next day'
+            t('habits.wakeEarly'), t('habits.exercise'), t('habits.read'), t('habits.noSocial'),
+            t('habits.water'), t('habits.meditate'), t('habits.journal'), t('habits.screenFreeEvening'),
+            t('habits.healthyMeals'), t('habits.planNextDay')
         ];
 
         return `
-        <div class="template-page ${isA5 ? 'a5' : ''}" id="monthly-habits">
+        <div class="template-page ${isA5 ? 'a5' : ''}" id="monthly-habits" dir="${I18N.getDir()}">
             <div class="tpl-header">
                 <div>
-                    <h2>Monthly Habit Grid</h2>
-                    <div class="tpl-subtitle">Track every day. Build the chain.</div>
+                    <h2>${t('mhabits.title')}</h2>
+                    <div class="tpl-subtitle">${t('mhabits.subtitle')}</div>
                 </div>
                 <div class="tpl-date">${monthName}</div>
             </div>
@@ -172,7 +172,7 @@ const MonthlyTemplates = {
                     <table class="tpl-habit-grid" style="font-size:${isA5 ? '0.55rem' : '0.65rem'}">
                         <thead>
                             <tr>
-                                <th class="habit-name">Habit</th>
+                                <th class="habit-name">${t('habits.habit')}</th>
                                 ${repeat(displayDays, (i) => `<th>${i + 1}</th>`)}
                                 <th>%</th>
                             </tr>
@@ -191,24 +191,24 @@ const MonthlyTemplates = {
 
             <!-- Monthly Reflection -->
             <div class="tpl-section">
-                <div class="tpl-section-title"><span class="icon">📊</span> Monthly Summary</div>
+                <div class="tpl-section-title"><span class="icon">📊</span> ${t('mhabits.summary')}</div>
                 <div class="${isA5 ? '' : 'tpl-2col'}">
                     <div class="tpl-box">
-                        <div class="tpl-box-title">Best habit this month:</div>
+                        <div class="tpl-box-title">${t('mhabits.bestHabit')}</div>
                         <div class="tpl-line"></div>
-                        <div class="tpl-box-title" style="margin-top:0.3rem">Hardest habit:</div>
+                        <div class="tpl-box-title" style="margin-top:0.3rem">${t('mhabits.hardestHabit')}</div>
                         <div class="tpl-line"></div>
                     </div>
                     <div class="tpl-box">
-                        <div class="tpl-box-title">Longest streak:</div>
+                        <div class="tpl-box-title">${t('mhabits.longestStreak')}</div>
                         <div class="tpl-line"></div>
-                        <div class="tpl-box-title" style="margin-top:0.3rem">Next month focus:</div>
+                        <div class="tpl-box-title" style="margin-top:0.3rem">${t('mhabits.nextMonthFocus')}</div>
                         <div class="tpl-line"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="tpl-mantra">Don't break the chain. Every check mark is a vote for who you want to become.</div>
+            <div class="tpl-mantra">${t('mhabits.mantra')}</div>
         </div>`;
     }
 };
@@ -220,7 +220,9 @@ function generateCalendarGrid(date) {
     const month = date.getMonth();
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const dayNames = I18N.isRTL()
+        ? ['أح','إث','ثل','أر','خم','جم','سب']
+        : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
     let html = '<table class="tpl-calendar"><thead><tr>';
     dayNames.forEach(d => { html += `<th>${d}</th>`; });
