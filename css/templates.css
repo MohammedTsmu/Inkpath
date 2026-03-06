@@ -489,3 +489,90 @@
     letter-spacing: 0.06em;
     margin-bottom: 0.3rem;
 }
+
+/* ========== PDF EXPORT — darken lines for visibility ========== */
+
+.pdf-export .tpl-line,
+.pdf-export .tpl-line-labeled .line,
+.pdf-export .tpl-check-line {
+    border-bottom-color: #999;
+}
+
+.pdf-export .tpl-dotgrid .tpl-line {
+    background-image: radial-gradient(circle, #888 0.5px, transparent 0.5px);
+}
+
+.pdf-export .tpl-lined .tpl-line {
+    border-bottom-color: #999;
+}
+
+.pdf-export .tpl-checklist li {
+    border-bottom-color: #bbb;
+}
+
+.pdf-export .tpl-section-title {
+    border-bottom-color: #999;
+    color: #333;
+}
+
+.pdf-export .tpl-timeblock {
+    border-left-color: #999;
+}
+
+.pdf-export .tpl-timeblock-time,
+.pdf-export .tpl-timeblock-slot {
+    border-bottom-color: #aaa;
+}
+
+.pdf-export .tpl-table th,
+.pdf-export .tpl-table td,
+.pdf-export .tpl-calendar th,
+.pdf-export .tpl-calendar td {
+    border-color: #999;
+}
+
+.pdf-export .tpl-habit-grid th,
+.pdf-export .tpl-habit-grid td {
+    border-color: #999;
+}
+
+.pdf-export .tpl-box,
+.pdf-export .tpl-matrix-cell {
+    border-color: #999;
+}
+
+.pdf-export .tpl-rating-dot {
+    border-color: #777;
+}
+
+.pdf-export .tpl-progress-segment {
+    border-color: #999;
+}
+
+.pdf-export .tpl-footer-line {
+    border-top-color: #999;
+}
+
+.pdf-export .tpl-mantra {
+    border-top-color: #999;
+}
+
+.pdf-export .tpl-header {
+    border-bottom-color: #000;
+}
+
+.pdf-export .tpl-quote-box {
+    border-left-color: #555;
+}
+
+.pdf-export .tpl-highlight-box {
+    border-color: #999;
+}
+
+.pdf-export .tpl-section {
+    border-color: #999;
+}
+
+.pdf-export .tpl-checkbox {
+    border-color: #777;
+}

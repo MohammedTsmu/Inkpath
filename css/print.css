@@ -98,13 +98,83 @@ body.paper-a5 {
         border-color: #999 !important;
     }
 
-    /* Make sure lines are visible */
-    .tpl-line {
-        border-bottom-color: #ddd !important;
+    /* Make sure lines are visible when printed */
+    .tpl-line,
+    .tpl-line-labeled .line,
+    .tpl-check-line {
+        border-bottom-color: #999 !important;
     }
 
     .tpl-dotgrid .tpl-line {
         border-bottom: none !important;
+        background-image: radial-gradient(circle, #888 0.5px, transparent 0.5px) !important;
+    }
+
+    .tpl-lined .tpl-line {
+        border-bottom-color: #999 !important;
+    }
+
+    .tpl-checklist li {
+        border-bottom-color: #bbb !important;
+    }
+
+    .tpl-section-title {
+        border-bottom-color: #999 !important;
+        color: #333 !important;
+    }
+
+    .tpl-timeblock {
+        border-left-color: #999 !important;
+    }
+
+    .tpl-timeblock-time,
+    .tpl-timeblock-slot {
+        border-bottom-color: #aaa !important;
+    }
+
+    .tpl-table th,
+    .tpl-table td,
+    .tpl-calendar th,
+    .tpl-calendar td {
+        border-color: #999 !important;
+    }
+
+    .tpl-habit-grid th,
+    .tpl-habit-grid td {
+        border-color: #999 !important;
+    }
+
+    .tpl-box,
+    .tpl-matrix-cell {
+        border-color: #999 !important;
+    }
+
+    .tpl-rating-dot {
+        border-color: #777 !important;
+    }
+
+    .tpl-progress-segment {
+        border-color: #999 !important;
+    }
+
+    .tpl-footer-line {
+        border-top-color: #999 !important;
+    }
+
+    .tpl-mantra {
+        border-top-color: #999 !important;
+    }
+
+    .tpl-header {
+        border-bottom-color: #000 !important;
+    }
+
+    .tpl-quote-box {
+        border-left-color: #555 !important;
+    }
+
+    .tpl-highlight-box {
+        border-color: #999 !important;
     }
 }
 

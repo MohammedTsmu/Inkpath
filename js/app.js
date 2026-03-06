@@ -189,6 +189,9 @@
         clone.style.webkitPrintColorAdjust = 'exact';
         clone.style.colorAdjust = 'exact';
 
+        // Darken lines for PDF visibility
+        clone.classList.add('pdf-export');
+
         wrapper.appendChild(clone);
         document.body.appendChild(wrapper);
 
