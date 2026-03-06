@@ -6,7 +6,12 @@ A web app that generates beautiful, printable planner templates designed to help
 
 ---
 
-## v3.0.0 — What's New
+## v3.1.0 — What's New
+
+- **Improved print visibility** — All template lines, borders, and grid elements are now darker and clearly visible when printed
+- **Improved PDF export visibility** — Lines and borders in exported PDFs are no longer faded; all elements render with strong contrast
+
+## v3.0.0
 
 - **34 templates** across 11 categories
 - **Study & Learning category** — 7 new templates for students: Study Session Planner, Exam Countdown, Cornell Notes, Spaced Repetition Tracker, Weekly Study Timetable, Assignment Tracker, Subject Review Sheet
